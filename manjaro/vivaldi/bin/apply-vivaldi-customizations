@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -euxo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+VIVALDI_DIR='/opt/vivaldi-snapshot/resources/vivaldi'
+VIVALDI_CUSTOMIZATIONS_DIR='/usr/lib/vivaldi-customizations'
+
+sudo ln -f "$VIVALDI_CUSTOMIZATIONS_DIR/custom.css" "$VIVALDI_DIR/style/custom.css"
+sudo ln -f "$VIVALDI_CUSTOMIZATIONS_DIR/custom.js" "$VIVALDI_DIR/style/custom.js"
+sudo sed -i'' -E 's:(<!--__ULT_CUSTOMIZATIONS__-->.*<!--/__ULT_CUSTOMIZATIONS__-->)?(</head>):<!--__ULT_CUSTOMIZATIONS__--><link rel="stylesheet" href="style/custom.css"><!--/__ULT_CUSTOMIZATIONS__-->\2:; s:(<!--__ULT_CUSTOMIZATIONS__-->.*<!--/__ULT_CUSTOMIZATIONS__-->)?(</body>):<!--__ULT_CUSTOMIZATIONS__--><script src="style/custom.js"></script><!--/__ULT_CUSTOMIZATIONS__-->\2:' "$VIVALDI_DIR/browser.html"

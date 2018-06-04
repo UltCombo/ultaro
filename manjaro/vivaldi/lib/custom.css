@@ -1,0 +1,86 @@
+/*
+:root {
+  --address-bar-height: 34px;
+  --find-bar-height: 34px;
+}
+*/
+
+/* Hide window controls and menu */
+#titlebar {
+  display: none;
+}
+
+#tabs-container.top {
+  padding: 0 !important;
+}
+
+/* Hide new tab button */
+#tabs-container .newtab {
+  display: none;
+}
+
+/* Adjust tabs container size */
+#tabs-container .resize {
+  margin-right: -63px;
+}
+
+#tabs-container .sync-and-trash-container {
+  z-index: 1;
+}
+
+/* Hide reload and home buttons */
+.toolbar-addressbar .reload,
+.toolbar-addressbar .home {
+  display: none;
+}
+
+/* Start page */
+#browser.address-off .startpage-navigation {
+  min-height: 65px;
+  transition: padding-top 0s .2s;
+}
+
+#browser.address-off .toolbar-addressbar:focus-within + .inner .startpage-navigation {
+  padding-top: 35px;
+  transition-delay: 0s;
+}
+
+/*
+.toolbar-addressbar {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: var(--colorBg);
+  transition-property: opacity, transform, margin-top;
+  transition-duration: .1s, .1s, 0s;
+}
+
+#header:not(:hover):not(:focus-within) + #main > .toolbar-addressbar:not(:hover):not(:focus-within) {
+  opacity: 0;
+  transform: translateY(-30%);
+  margin-top: -99999px;
+  transition-delay: 0s, 0s, .1s;
+}
+
+.find-in-page {
+  top: var(--address-bar-height) !important;
+}
+
+.find-in-page + .devtools-container .webpage {
+  top: calc(var(--address-bar-height) + var(--find-bar-height)) !important;
+}
+
+#header:not(:hover):not(:focus-within) + #main > .toolbar-addressbar:not(:hover):not(:focus-within) + .inner .find-in-page {
+  top: 0 !important;
+}
+
+#header:not(:hover):not(:focus-within) + #main > .toolbar-addressbar:not(:hover):not(:focus-within) + .inner .find-in-page + .devtools-container .webpage {
+  top: var(--find-bar-height) !important;
+}
+
+.startpage {
+  margin-top: var(--address-bar-height);
+}
+*/

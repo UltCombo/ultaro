@@ -1,0 +1,115 @@
+#!/bin/bash
+# Ult's Manjaro GNOME 17 setup.
+
+set -euxo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+if [[ "$(id -u)" -eq 0 ]]; then
+  echo "This script cannot be run as root."
+  exit 1
+fi
+
+# Set up AdGuard DNS.
+echo $'[main]\ndns=none' | sudo tee /etc/NetworkManager/conf.d/99-prevent-dns-changes.conf
+echo $'\nname_servers="176.103.130.130 176.103.130.131"' | sudo tee -a /etc/resolvconf.conf
+sudo resolvconf -u
+
+# Import public key necessary to build vivaldi-snapshot-ffmpeg-codecs dependency.
+gpg --recv-keys 702353E0F7E48EDB
+
+# Install Vivaldi customizations (Pacman hook).
+./vivaldi/install-customizations
+
+sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
+sudo pacman -Syu
+sudo pacman -Rs --noconfirm manjaro-gnome-maia-theme manjaro-gnome-assets nautilus-empty-file bijiben empathy telepathy-accounts-signon ms-office-online libreoffice-fresh brasero gthumb totem grilo-plugins firefox
+sudo pacman -S --needed --noconfirm base-devel yaourt yarn python-pip git fish docker mongodb chrome-gnome-shell xorg-xprop xclip shotwell vlc papirus-icon-theme noto-fonts-emoji
+yaourt -S --needed --noconfirm visual-studio-code-insiders vivaldi-snapshot vivaldi-snapshot-ffmpeg-codecs google-chrome shadowsocks-qt5 stacer nvm terraform slack-desktop skypeforlinux-stable-bin ttf-fira-code
+pip install --user --upgrade awscli
+curl -sSL https://www.astrill.com/downloads/astrill-setup-linux64.sh > astrill-setup-linux64.sh
+chmod +x astrill-setup-linux64.sh
+sudo ./astrill-setup-linux64.sh --sudo
+rm astrill-setup-linux64.sh
+
+# Set up fonts.
+sudo ln -f fonts/local.conf /etc/fonts/local.conf
+
+# Set up $PATH.
+echo PATH="$(yarn global bin):~/.local/bin:\$PATH" >> ~/.bash_profile
+fish --command 'set -U fish_user_paths (yarn global bin) ~/.local/bin $fish_user_paths'
+
+# Set up Docker.
+sudo gpasswd -a "$(whoami)" docker
+
+# Set up fish, nvm, fast-nvm-fish.
+chsh -s /usr/bin/fish
+mkdir -p ~/.config/fish/functions
+ln -f fish/functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
+./fish/theme.fish
+./fish/abbr.fish
+sudo chown -R "$(whoami)" /usr/share/nvm
+echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
+echo 'set -gx NVM_DIR /usr/share/nvm' >> ~/.config/fish/config.fish
+curl -sSL https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish > ~/.config/fish/functions/nvm.fish
+fish --command 'nvm install 10'
+echo 'nvm use 10' >> ~/.config/fish/config.fish
+
+# Set up GNOME.
+timedatectl set-ntp 1
+gsettings set org.gnome.desktop.datetime automatic-timezone true
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+gsettings set org.gnome.desktop.privacy remember-recent-files false
+gsettings set org.gnome.desktop.privacy recent-files-max-age 0
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.desktop.notifications show-in-lock-screen false
+gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/wallpaper/wallpaper.jpg"
+gsettings set org.gnome.desktop.screensaver picture-uri "file://$(pwd)/wallpaper/wallpaper.jpg"
+gsettings set org.gnome.system.proxy mode 'manual'
+gsettings set org.gnome.system.proxy.socks host '127.0.0.1'
+gsettings set org.gnome.system.proxy.socks port 1080
+gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12']"
+gsettings set org.gtk.Settings.FileChooser sort-directories-first true
+gsettings set org.gtk.Settings.FileChooser show-hidden true
+
+# Enable Wayland.
+# sudo pacman -Rs --noconfirm manjaro-gdm-check
+# sudo sed -i'' -E 's/.*(WaylandEnable=.*)/#\1/' /etc/gdm/custom.conf
+
+# Don't suspend when lid is closed, just lock screen.
+sudo sed -i'' -E 's/.*(HandleLidSwitch=).*/\1lock/' /etc/systemd/logind.conf
+
+# Set up system.
+echo 'fs.inotify.max_user_watches=524288' | sudo tee /etc/sysctl.d/40-max-user-watches.conf
+sudo sysctl --system
+
+# Allow Docker to perform `apt-get install` etc.
+# sudo sed -i'' 's/\(GRUB_CMDLINE_LINUX_DEFAULT="[^"]*\)/\1 vsyscall=emulate/' /etc/default/grub
+# sudo update-grub
+
+# Set up startup applications and services.
+sudo rm -f /etc/xdg/autostart/blueman.desktop
+sudo systemctl mask --now man-db.timer
+# sudo systemctl enable --now docker
+
+# Clean up.
+rm -f ~/Readme ~/Templates/*
+
+cat << EOF
+✨ Setup finished successfully.
+
+#
+# Manual config
+#
+
+Dash to dock:
+- Intelligent autohide: animation duration .15s, hide timeout 0s
+- Icon size limit: 48
+
+Hide Top Bar:
+- Animation: overview .3s, edge: .1s
+
+VS Code Sync Settings: https://gist.github.com/UltCombo/6107218148de04eb7b2165b5a4c00645
+DuckDuckGo config: https://duckduckgo.com/?q=%s&t=vivaldi&kae=d&k1=-1&kaj=m&kam=osm&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&k5=2&k7=282c34&kj=21252b&k9=98c379&kx=61afef
+Shadowsocks config
+EOF

@@ -1,0 +1,10 @@
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = vivaldi-snapshot
+
+[Action]
+Description = Apply UltCombo's Vivaldi customizations
+When = PostTransaction
+Exec = /usr/bin/apply-vivaldi-customizations
