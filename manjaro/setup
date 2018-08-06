@@ -22,9 +22,9 @@ gpg --recv-keys 702353E0F7E48EDB
 
 sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
 sudo pacman -Syu
-sudo pacman -Rs --noconfirm manjaro-gnome-maia-theme manjaro-gnome-assets nautilus-empty-file bijiben empathy telepathy-accounts-signon ms-office-online libreoffice-fresh brasero gthumb totem grilo-plugins firefox
+sudo pacman -Rs --noconfirm manjaro-gnome-maia-theme manjaro-gnome-assets nautilus-empty-file bijiben gnome-screenshot empathy telepathy-accounts-signon ms-office-online libreoffice-fresh brasero gthumb totem grilo-plugins firefox
 sudo pacman -S --needed --noconfirm base-devel yaourt yarn python-pip git fish docker mongodb chrome-gnome-shell xorg-xprop xclip shotwell vlc papirus-icon-theme noto-fonts-emoji
-yaourt -S --needed --noconfirm visual-studio-code-insiders vivaldi-snapshot vivaldi-snapshot-ffmpeg-codecs google-chrome shadowsocks-qt5 stacer nvm terraform slack-desktop skypeforlinux-stable-bin ttf-fira-code
+yaourt -S --needed --noconfirm visual-studio-code-insiders vivaldi-snapshot vivaldi-snapshot-ffmpeg-codecs google-chrome shadowsocks-qt5 shutter stacer nvm terraform slack-desktop skypeforlinux-stable-bin ttf-fira-code
 pip install --user --upgrade awscli
 curl -sSL https://www.astrill.com/downloads/astrill-setup-linux64.sh > astrill-setup-linux64.sh
 chmod +x astrill-setup-linux64.sh
@@ -71,6 +71,29 @@ gsettings set org.gnome.system.proxy.socks port 1080
 gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12']"
 gsettings set org.gtk.Settings.FileChooser sort-directories-first true
 gsettings set org.gtk.Settings.FileChooser show-hidden true
+
+# Replace gnome-screenshot keybindings with shutter.
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ''
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot-clip ''
+gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot ''
+gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot-clip ''
+gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot ''
+gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip ''
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Shutter - capture desktop"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "shutter --full --profile=silent --no_session --exit_after_capture"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "Print"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name "Shutter - capture window"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "shutter --window --profile=silent --no_session --exit_after_capture"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding "<Ctrl>Print"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name "Shutter - capture selection"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command "shutter --select --profile=silent --no_session --exit_after_capture"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding "<Shift>Print"
+sudo rm -rf /usr/share/shutter/resources/system/upload_plugins/upload/*
+sudo rm -rf /usr/share/shutter/resources/system/plugins/*
+mkdir -p ~/.shutter/profiles
+ln -f shutter/profiles/silent.xml ~/.shutter/profiles/silent.xml
+ln -f shutter/profiles/silent_accounts.xml ~/.shutter/profiles/silent_accounts.xml
 
 # Enable Wayland.
 # sudo pacman -Rs --noconfirm manjaro-gdm-check
