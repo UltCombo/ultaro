@@ -1,26 +1,35 @@
 (async () => {
   'use strict';
 
+  const $ = (...args) => document.querySelector(...args);
   const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
   let addressBar;
+  let webpageStack;
 
-  while (!(addressBar = document.querySelector('.vivaldi-addressfield'))) {
+  while (!(addressBar = $('.vivaldi-addressfield'))) {
     await delay(20);
   }
 
-  const focusAddressBar = () => addressBar.focus();
+  while (!(webpageStack = $('#webpage-stack'))) {
+    await delay(20);
+  }
 
-  window.addEventListener('keydown', ({ ctrlKey, key }) => {
-    if (ctrlKey && key === 't') {
-      focusAddressBar();
-    }
-  });
-
-  // On new window.
-  setTimeout(() => {
+  const focusAddressBarOnNewTab = () => setTimeout(() => {
     if (!addressBar.value) {
-      focusAddressBar();
+      addressBar.focus();
     }
   }, 10);
+
+  new MutationObserver((mutations) => {
+    for (const { addedNodes } of mutations) {
+      if (addedNodes.length && addedNodes[0].classList.contains('active')) {
+        focusAddressBarOnNewTab();
+        return;
+      }
+    }
+  }).observe(webpageStack, { childList: true });
+
+  // On new window.
+  focusAddressBarOnNewTab();
 })();
