@@ -9,8 +9,11 @@ if [[ "$(id -u)" -eq 0 ]]; then
   exit 1
 fi
 
+# Set up Network Manager.
+sudo ln -f network-manager/99-disable-wifi-powersave.conf /etc/NetworkManager/conf.d/99-disable-wifi-powersave.conf
+sudo ln -f network-manager/99-prevent-dns-changes.conf /etc/NetworkManager/conf.d/99-prevent-dns-changes.conf
+
 # Set up AdGuard DNS.
-echo $'[main]\ndns=none' | sudo tee /etc/NetworkManager/conf.d/99-prevent-dns-changes.conf
 echo $'\nname_servers="176.103.130.130 176.103.130.131"' | sudo tee -a /etc/resolvconf.conf
 sudo resolvconf -u
 
@@ -22,7 +25,7 @@ gpg --recv-keys 702353E0F7E48EDB
 
 sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
 sudo pacman -Syu
-sudo pacman -Rs --noconfirm manjaro-gnome-maia-theme manjaro-gnome-assets nautilus-empty-file bijiben gnome-screenshot empathy telepathy-accounts-signon ms-office-online libreoffice-fresh brasero gthumb totem grilo-plugins firefox
+sudo pacman -Rs --noconfirm tlp manjaro-gnome-maia-theme manjaro-gnome-assets nautilus-empty-file bijiben gnome-screenshot empathy telepathy-accounts-signon ms-office-online libreoffice-fresh brasero gthumb totem grilo-plugins firefox
 sudo pacman -S --needed --noconfirm base-devel yaourt yarn python-pip git fish docker mongodb chrome-gnome-shell xorg-xprop xclip shotwell vlc papirus-icon-theme noto-fonts-emoji
 yaourt -S --needed --noconfirm visual-studio-code-insiders vivaldi-snapshot vivaldi-snapshot-ffmpeg-codecs google-chrome shadowsocks-qt5 shutter stacer nvm terraform slack-desktop skypeforlinux-stable-bin ttf-fira-code
 pip install --user --upgrade awscli
@@ -61,7 +64,10 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
 gsettings set org.gnome.desktop.privacy remember-recent-files false
 gsettings set org.gnome.desktop.privacy recent-files-max-age 0
+gsettings set org.gnome.desktop.session idle-delay 900
 gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
 gsettings set org.gnome.desktop.notifications show-in-lock-screen false
 gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/wallpaper/wallpaper.jpg"
 gsettings set org.gnome.desktop.screensaver picture-uri "file://$(pwd)/wallpaper/wallpaper.jpg"
@@ -99,8 +105,8 @@ ln -f shutter/profiles/silent_accounts.xml ~/.shutter/profiles/silent_accounts.x
 # sudo pacman -Rs --noconfirm manjaro-gdm-check
 # sudo sed -i'' -E 's/.*(WaylandEnable=.*)/#\1/' /etc/gdm/custom.conf
 
-# Don't suspend when lid is closed, just lock screen.
-sudo sed -i'' -E 's/.*(HandleLidSwitch=).*/\1lock/' /etc/systemd/logind.conf
+# Don't suspend when lid is closed.
+sudo sed -i'' -E 's/.*(HandleLidSwitch=).*/\1ignore/' /etc/systemd/logind.conf
 
 # Set up system.
 echo 'fs.inotify.max_user_watches=524288' | sudo tee /etc/sysctl.d/40-max-user-watches.conf
