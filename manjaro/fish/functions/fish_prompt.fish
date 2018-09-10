@@ -1,5 +1,5 @@
 function _pwd_with_tilde
-  echo $PWD | sed 's|^'$HOME'\(.*\)$|~\1|'
+  echo $PWD | sed 's|^'$HOME'|~|'
 end
 
 function _in_git_directory
@@ -62,7 +62,7 @@ end
 
 function _print_in_color
   set -l string $argv[1]
-  set -l color  $argv[2]
+  set -l color $argv[2]
 
   set_color $color
   printf $string
@@ -80,7 +80,7 @@ end
 function fish_prompt
   set -l last_status $status
 
-  _print_in_color "\n"(_pwd_with_tilde) 31bc21
+  _print_in_color (_pwd_with_tilde) 31bc21
 
   if _in_git_directory
     _print_in_color " "(_git_branch_name_or_revision) 888
