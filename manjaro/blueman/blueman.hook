@@ -1,0 +1,10 @@
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = blueman
+
+[Action]
+Description = Disable Blueman autostart
+When = PostTransaction
+Exec = /bin/bash -c 'rm -f /etc/xdg/autostart/blueman.desktop'

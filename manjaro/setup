@@ -20,8 +20,10 @@ sudo resolvconf -u
 # Import public key necessary to build vivaldi-snapshot-ffmpeg-codecs dependency.
 gpg --recv-keys 702353E0F7E48EDB
 
-# Install Vivaldi customizations (Pacman hook).
+# Set up Pacman hooks.
 ./vivaldi/install-customizations
+sudo ln -f shutter/shutter.hook /usr/share/libalpm/hooks/shutter.hook
+sudo ln -f blueman/blueman.hook /usr/share/libalpm/hooks/blueman.hook
 
 sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
 sudo pacman -Syu
@@ -95,8 +97,6 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name "Shutter - capture selection"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command "shutter --select --profile=silent --no_session --exit_after_capture"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding "<Shift>Print"
-sudo rm -rf /usr/share/shutter/resources/system/upload_plugins/upload/*
-sudo rm -rf /usr/share/shutter/resources/system/plugins/*
 mkdir -p ~/.shutter/profiles
 ln -f shutter/profiles/silent.xml ~/.shutter/profiles/silent.xml
 ln -f shutter/profiles/silent_accounts.xml ~/.shutter/profiles/silent_accounts.xml
@@ -117,7 +117,6 @@ sudo sysctl --system
 # sudo update-grub
 
 # Set up startup applications and services.
-sudo rm -f /etc/xdg/autostart/blueman.desktop
 sudo systemctl mask --now man-db.timer
 # sudo systemctl enable --now docker
 

@@ -1,0 +1,10 @@
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = shutter
+
+[Action]
+Description = Optimize Shutter
+When = PostTransaction
+Exec = /bin/bash -c 'rm -rf /usr/share/shutter/resources/system/plugins/* /usr/share/shutter/resources/system/upload_plugins/upload/*'
