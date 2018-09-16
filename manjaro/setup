@@ -101,10 +101,6 @@ mkdir -p ~/.shutter/profiles
 ln -f shutter/profiles/silent.xml ~/.shutter/profiles/silent.xml
 ln -f shutter/profiles/silent_accounts.xml ~/.shutter/profiles/silent_accounts.xml
 
-# Enable Wayland.
-# sudo pacman -Rs --noconfirm manjaro-gdm-check
-# sudo sed -i'' -E 's/.*(WaylandEnable=.*)/#\1/' /etc/gdm/custom.conf
-
 # Don't suspend when lid is closed.
 sudo sed -i'' -E 's/.*(HandleLidSwitch=).*/\1ignore/' /etc/systemd/logind.conf
 
@@ -112,13 +108,8 @@ sudo sed -i'' -E 's/.*(HandleLidSwitch=).*/\1ignore/' /etc/systemd/logind.conf
 echo 'fs.inotify.max_user_watches=524288' | sudo tee /etc/sysctl.d/40-max-user-watches.conf
 sudo sysctl --system
 
-# Allow Docker to perform `apt-get install` etc.
-# sudo sed -i'' 's/\(GRUB_CMDLINE_LINUX_DEFAULT="[^"]*\)/\1 vsyscall=emulate/' /etc/default/grub
-# sudo update-grub
-
 # Set up startup applications and services.
 sudo systemctl mask --now man-db.timer
-# sudo systemctl enable --now docker
 
 # Clean up.
 rm -f ~/Readme ~/Templates/*
