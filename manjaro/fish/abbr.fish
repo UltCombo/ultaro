@@ -6,7 +6,7 @@ abbr gc 'git commit'
 abbr gb 'git branch'
 abbr gco 'git checkout'
 abbr gcb 'git checkout -b'
-abbr gf 'git fetch -p'
+abbr gf 'git fetch -pP'
 abbr gl 'git pull'
 abbr gp 'git push'
 abbr gm 'git merge'
@@ -17,5 +17,7 @@ abbr gstp 'git stash pop'
 abbr glog 'git log --oneline --decorate --graph'
 abbr gloga 'git log --oneline --decorate --graph --all'
 
-# Copy to clipboard.
+# Utilities.
+abbr o 'xdg-open'
+abbr t 'npm test'
 abbr cb 'xclip -i -selection clipboard'
