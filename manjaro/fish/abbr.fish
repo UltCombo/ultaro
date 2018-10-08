@@ -1,6 +1,6 @@
 #!/usr/bin/fish
 
-# Set Git abbreviations.
+# Git.
 abbr gst 'git status'
 abbr gc 'git commit'
 abbr gb 'git branch'
@@ -16,6 +16,13 @@ abbr gsta 'git stash'
 abbr gstp 'git stash pop'
 abbr glog 'git log --oneline --decorate --graph'
 abbr gloga 'git log --oneline --decorate --graph --all'
+abbr g 'git'
+
+# Docker.
+abbr db 'docker build'
+abbr dr 'docker run'
+abbr dsp 'docker system prune -af'
+abbr d 'docker'
 
 # Utilities.
 abbr o 'xdg-open'
