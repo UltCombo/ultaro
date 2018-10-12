@@ -35,6 +35,11 @@ sudo ./astrill-setup-linux64.sh --sudo
 rm astrill-setup-linux64.sh
 sudo pacman -Sc --noconfirm
 
+# Set up desktop files and default applications.
+ln -f desktop/vivaldi-snapshot.desktop ~/.local/share/applications/vivaldi-snapshot.desktop
+ln -f desktop/vivaldi-snapshot-incognito.desktop ~/.local/share/applications/vivaldi-snapshot-incognito.desktop
+ln -f config/mimeapps.list ~/.config/mimeapps.list
+
 # Set up fonts.
 sudo ln -f fonts/local.conf /etc/fonts/local.conf
 

@@ -1,0 +1,13 @@
+[Added Associations]
+application/x-shellscript=visual-studio-code-insiders.desktop;org.gnome.gedit.desktop;
+text/css=visual-studio-code-insiders.desktop;
+application/javascript=visual-studio-code-insiders.desktop;
+image/png=org.gnome.gThumb.desktop;shotwell-viewer.desktop;
+image/jpeg=shotwell-viewer.desktop;
+
+[Default Applications]
+text/html=vivaldi-snapshot-incognito.desktop
+x-scheme-handler/http=vivaldi-snapshot-incognito.desktop
+x-scheme-handler/https=vivaldi-snapshot-incognito.desktop
+x-scheme-handler/about=vivaldi-snapshot-incognito.desktop
+x-scheme-handler/unknown=vivaldi-snapshot-incognito.desktop
