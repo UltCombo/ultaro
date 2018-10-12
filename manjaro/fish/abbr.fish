@@ -19,9 +19,9 @@ abbr gloga 'git log --oneline --decorate --graph --all'
 abbr g 'git'
 
 # Docker.
-abbr db 'docker build'
-abbr dr 'docker run'
-abbr dsp 'docker system prune -af'
+abbr db 'docker image build -t'
+abbr dr 'docker container run'
+abbr dp 'docker system prune -af'
 abbr d 'docker'
 
 # Utilities.
