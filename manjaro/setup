@@ -133,6 +133,6 @@ Hide Top Bar:
 - Animation: overview .3s, edge: .1s
 
 VS Code Sync Settings: https://gist.github.com/UltCombo/6107218148de04eb7b2165b5a4c00645
-DuckDuckGo config: https://duckduckgo.com/?q=%s&t=vivaldi&kae=d&k1=-1&kaj=m&kam=osm&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&k5=2&k7=282c34&kj=21252b&k9=98c379&kx=61afef
+DuckDuckGo search template: https://duckduckgo.com/?q=%s&t=vivaldi&kae=d&k1=-1&kaj=m&kam=osm&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&kau=-1&k5=2&k7=282c34&kj=21252b&k9=98c379&kx=61afef
 Shadowsocks config
 EOF
