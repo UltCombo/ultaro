@@ -107,6 +107,13 @@ mkdir -p ~/.shutter/profiles
 ln -f shutter/profiles/silent.xml ~/.shutter/profiles/silent.xml
 ln -f shutter/profiles/silent_accounts.xml ~/.shutter/profiles/silent_accounts.xml
 
+# Set up GNOME extensions.
+rm -rf ~/.local/share/gnome-shell/extensions
+ln -s "$(pwd)/extensions" ~/.local/share/gnome-shell/extensions
+for extension in extensions/*; do
+  gnome-shell-extension-tool -e "$(basename "$extension")"
+done
+
 # Don't suspend when lid is closed.
 sudo sed -i'' -E 's/.*(HandleLidSwitch=).*/\1ignore/' /etc/systemd/logind.conf
 
