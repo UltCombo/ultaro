@@ -70,6 +70,9 @@ timedatectl set-ntp 1
 gsettings set org.gnome.desktop.datetime automatic-timezone true
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+gsettings set org.gnome.desktop.interface clock-show-date false
+gsettings set org.gnome.desktop.interface clock-show-seconds false
+gsettings set org.gnome.desktop.interface clock-show-weekday false
 gsettings set org.gnome.desktop.privacy remember-recent-files false
 gsettings set org.gnome.desktop.privacy recent-files-max-age 0
 gsettings set org.gnome.desktop.session idle-delay 900
