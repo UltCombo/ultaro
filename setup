@@ -12,8 +12,7 @@ if [[ "$(id -u)" -eq 0 ]]; then
 fi
 
 # Set up Network Manager.
-sudo ln -f network-manager/99-disable-wifi-powersave.conf /etc/NetworkManager/conf.d/99-disable-wifi-powersave.conf
-sudo ln -f network-manager/99-prevent-dns-changes.conf /etc/NetworkManager/conf.d/99-prevent-dns-changes.conf
+sudo ln -f network-manager/* /etc/NetworkManager/conf.d/
 
 # Set up AdGuard DNS.
 echo $'\nname_servers="176.103.130.130 176.103.130.131"' | sudo tee -a /etc/resolvconf.conf
@@ -38,12 +37,11 @@ rm astrill-setup-linux64.sh
 sudo pacman -Sc --noconfirm
 
 # Set up desktop files and default applications.
-ln -f desktop/vivaldi-snapshot.desktop ~/.local/share/applications/vivaldi-snapshot.desktop
-ln -f desktop/vivaldi-snapshot-incognito.desktop ~/.local/share/applications/vivaldi-snapshot-incognito.desktop
-ln -f config/mimeapps.list ~/.config/mimeapps.list
+ln -f desktop/* ~/.local/share/applications/
+ln -f config/* ~/.config/
 
 # Set up fonts.
-sudo ln -f fonts/local.conf /etc/fonts/local.conf
+sudo ln -f fonts/* /etc/fonts/
 
 # Set up $PATH.
 echo PATH="$(yarn global bin):~/.local/bin:\$PATH" >> ~/.bash_profile
@@ -55,7 +53,7 @@ sudo gpasswd -a "$(whoami)" docker
 # Set up fish, nvm, fast-nvm-fish.
 chsh -s /usr/bin/fish
 mkdir -p ~/.config/fish/functions
-ln -f fish/functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
+ln -f fish/functions/* ~/.config/fish/functions/
 ./fish/theme.fish
 ./fish/abbr.fish
 sudo chown -R "$(whoami)" /usr/share/nvm
@@ -107,8 +105,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command "shutter --select --profile=silent"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding "<Shift>Print"
 mkdir -p ~/.shutter/profiles
-ln -f shutter/profiles/silent.xml ~/.shutter/profiles/silent.xml
-ln -f shutter/profiles/silent_accounts.xml ~/.shutter/profiles/silent_accounts.xml
+ln -f shutter/profiles/* ~/.shutter/profiles/
 
 # Set up GNOME extensions.
 rm -rf ~/.local/share/gnome-shell/extensions
