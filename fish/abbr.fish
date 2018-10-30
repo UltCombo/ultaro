@@ -2,6 +2,8 @@
 
 # Git.
 abbr gst 'git status'
+abbr gd 'git diff'
+abbr ga 'git add'
 abbr gc 'git commit'
 abbr gb 'git branch'
 abbr gco 'git checkout'
