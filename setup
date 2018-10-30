@@ -26,7 +26,7 @@ sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
 cat pacman/repos.conf | sudo tee -a /etc/pacman.conf
 sudo pacman -Syu
 sudo pacman -Rns --noconfirm tlp manjaro-hello manjaro-gnome-maia-theme manjaro-gnome-assets nautilus-empty-file bijiben gnome-screenshot empathy telepathy-accounts-signon ms-office-online libreoffice-fresh brasero gthumb totem grilo-plugins firefox
-sudo pacman -S --needed --noconfirm base-devel yaourt yarn python-pip git fish docker mongodb chrome-gnome-shell xorg-xprop xclip shotwell vlc papirus-icon-theme noto-fonts-emoji vivaldi-snapshot vivaldi-snapshot-ffmpeg-codecs google-chrome slack-desktop
+sudo pacman -S --needed --noconfirm base-devel yaourt yarn python-pip git fish docker mongodb chrome-gnome-shell xorg-xprop xorg-xkill xclip shotwell vlc papirus-icon-theme noto-fonts-emoji vivaldi-snapshot vivaldi-snapshot-ffmpeg-codecs google-chrome slack-desktop
 yaourt -S --needed --noconfirm visual-studio-code-bin shadowsocks-qt5 shutter stacer nvm terraform ttf-fira-code
 pip install --user --upgrade awscli
 curl -sSL https://www.astrill.com/downloads/astrill-setup-linux64.sh > astrill-setup-linux64.sh
