@@ -8,5 +8,3 @@ VIVALDI_CUSTOMIZATIONS_DIR='/usr/lib/vivaldi-customizations'
 sudo mkdir -p "$VIVALDI_CUSTOMIZATIONS_DIR"
 sudo ln -f lib/custom.css "$VIVALDI_CUSTOMIZATIONS_DIR/custom.css"
 sudo ln -f lib/custom.js "$VIVALDI_CUSTOMIZATIONS_DIR/custom.js"
-sudo ln -f bin/apply-vivaldi-customizations /usr/bin/apply-vivaldi-customizations
-sudo ln -f vivaldi.hook /usr/share/libalpm/hooks/vivaldi.hook

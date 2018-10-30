@@ -20,8 +20,7 @@ sudo resolvconf -u
 
 # Set up Pacman hooks.
 ./vivaldi/install-customizations
-sudo ln -f shutter/shutter.hook /usr/share/libalpm/hooks/shutter.hook
-sudo ln -f blueman/blueman.hook /usr/share/libalpm/hooks/blueman.hook
+sudo ln -f pacman/hooks/* /usr/share/libalpm/hooks/
 
 sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
 cat pacman/repos.conf | sudo tee -a /etc/pacman.conf
