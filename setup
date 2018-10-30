@@ -107,6 +107,7 @@ mkdir -p ~/.shutter/profiles
 ln -f shutter/profiles/* ~/.shutter/profiles/
 
 # Set up GNOME extensions.
+dconf load /org/gnome/shell/extensions/ < dconf/extensions.conf
 rm -rf ~/.local/share/gnome-shell/extensions
 ln -s "$(pwd)/extensions" ~/.local/share/gnome-shell/extensions
 for extension in extensions/*; do
@@ -133,13 +134,6 @@ cat << EOF
 #
 # Manual config
 #
-
-Dash to dock:
-- Intelligent autohide: animation duration .15s, hide timeout 0s
-- Icon size limit: 48
-
-Hide Top Bar:
-- Animation: overview .3s, edge: .1s
 
 VS Code Sync Settings: https://gist.github.com/UltCombo/6107218148de04eb7b2165b5a4c00645
 DuckDuckGo search template: https://duckduckgo.com/?q=%s&t=vivaldi&kae=d&k1=-1&kaj=m&kam=osm&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&kau=-1&k5=2&k7=282c34&kj=21252b&k9=98c379&kx=61afef
