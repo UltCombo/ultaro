@@ -80,7 +80,7 @@ gsettings set org.gnome.desktop.notifications show-in-lock-screen false
 gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/images/wallpaper.jpg"
 gsettings set org.gnome.desktop.screensaver picture-uri "file://$(pwd)/images/wallpaper.jpg"
 gsettings set org.gnome.shell favorite-apps "['vivaldi-snapshot.desktop', 'visual-studio-code.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
-gsettings set org.gnome.system.proxy mode 'manual'
+# gsettings set org.gnome.system.proxy mode 'manual'
 gsettings set org.gnome.system.proxy.socks host '127.0.0.1'
 gsettings set org.gnome.system.proxy.socks port 1080
 gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12']"
