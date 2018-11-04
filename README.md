@@ -64,7 +64,7 @@ As such, web applications should be preferred over native applications. Web appl
 
 I've used MacOS for 3 years and Windows for over a decade. As a power user, I always felt that these desktop environments never suited my needs completely. Although MacOS generally provides excellent UX, the lack of customization became a killer after a couple years bearing its limitations and shortcomings.
 
-I've been developing, experiencing and evolving this desktop environment for over 6 months before open-sourcing Ultaro. My goal is to provide a desktop environment that is simple and pleasant to use for power users.
+I've been developing, experiencing and evolving my desktop environment for over 6 months before open-sourcing it as Ultaro. My goal is to provide a desktop environment that is simple and pleasant for power users to use.
 
 ### Why the Mega Man wallpapers?
 
