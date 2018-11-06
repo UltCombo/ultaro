@@ -8,12 +8,11 @@ Based on [GNOME](https://www.gnome.org/gnome-3/), Ultaro draws inspiration from 
 
 The Ultaro setup is meant to be run after a clean [Manjaro Linux](https://manjaro.org/get-manjaro/) GNOME installation.
 
-Download or clone the repository then run the `setup` executable. That's it. For instance, from the terminal:
+Download or clone the repository then run the `setup` executable. For instance, from the terminal:
 
 ```sh
 git clone --depth 1 https://github.com/UltCombo/ultaro.git
-cd ultaro
-./setup
+./ultaro/setup
 ```
 
 ## Guiding principles
