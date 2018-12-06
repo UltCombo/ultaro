@@ -6,8 +6,8 @@ image/png=org.gnome.gThumb.desktop;shotwell-viewer.desktop;
 image/jpeg=shotwell-viewer.desktop;
 
 [Default Applications]
-text/html=vivaldi-snapshot-incognito.desktop
-x-scheme-handler/http=vivaldi-snapshot-incognito.desktop
-x-scheme-handler/https=vivaldi-snapshot-incognito.desktop
-x-scheme-handler/about=vivaldi-snapshot-incognito.desktop
-x-scheme-handler/unknown=vivaldi-snapshot-incognito.desktop
+text/html=browser-launcher.desktop
+x-scheme-handler/http=browser-launcher.desktop
+x-scheme-handler/https=browser-launcher.desktop
+x-scheme-handler/about=browser-launcher.desktop
+x-scheme-handler/unknown=browser-launcher.desktop

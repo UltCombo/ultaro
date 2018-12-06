@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
-Name=Vivaldi Incognito (snapshot)
-Exec=/usr/bin/vivaldi-snapshot --incognito %U
+Name=Browser Launcher
+Exec=/usr/bin/browser_launcher %U
 StartupNotify=true
 Terminal=false
 Icon=vivaldi-snapshot

@@ -36,6 +36,7 @@ rm astrill-setup-linux64.sh
 sudo pacman -Sc --noconfirm
 
 # Set up desktop files and default applications.
+sudo ln -f browser_launcher/bin/* /usr/bin/
 ln -f desktop/* ~/.local/share/applications/
 ln -f config/* ~/.config/
 
