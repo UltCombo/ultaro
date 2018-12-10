@@ -79,7 +79,7 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'no
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
 gsettings set org.gnome.desktop.notifications show-in-lock-screen false
 gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/images/wallpaper.jpg"
-gsettings set org.gnome.desktop.screensaver picture-uri "file://$(pwd)/images/wallpaper.jpg"
+gsettings set org.gnome.desktop.screensaver picture-uri "file://$(pwd)/images/lock_screen.jpg"
 gsettings set org.gnome.shell favorite-apps "['vivaldi-snapshot.desktop', 'visual-studio-code.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
 # gsettings set org.gnome.system.proxy mode 'manual'
 gsettings set org.gnome.system.proxy.socks host '127.0.0.1'
