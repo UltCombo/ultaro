@@ -3,7 +3,7 @@
 set -euxo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-VIVALDI_DIR='/opt/vivaldi-snapshot/resources/vivaldi'
+VIVALDI_DIR='/opt/vivaldi/resources/vivaldi'
 VIVALDI_CUSTOMIZATIONS_DIR='/usr/lib/vivaldi-customizations'
 
 sudo ln -f "$VIVALDI_CUSTOMIZATIONS_DIR/custom.css" "$VIVALDI_DIR/style/custom.css"

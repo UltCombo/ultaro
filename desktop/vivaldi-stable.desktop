@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
 Name=Vivaldi
-Exec=/usr/bin/vivaldi-snapshot %U
+Exec=/usr/bin/vivaldi-stable %U
 StartupNotify=true
 Terminal=false
-Icon=vivaldi-snapshot
+Icon=vivaldi
 Type=Application
 Categories=Network;WebBrowser;
 MimeType=text/html;text/xml;application/xhtml_xml;image/webp;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
@@ -12,8 +12,8 @@ Actions=switch-profile-ult;switch-profile-work;
 
 [Desktop Action switch-profile-ult]
 Name=Switch to Ult profile
-Exec=/usr/bin/vivaldi-snapshot --profile-directory=ult
+Exec=/usr/bin/vivaldi-stable --profile-directory=ult
 
 [Desktop Action switch-profile-work]
 Name=Switch to Work profile
-Exec=/usr/bin/vivaldi-snapshot --profile-directory=Default
+Exec=/usr/bin/vivaldi-stable --profile-directory=Default

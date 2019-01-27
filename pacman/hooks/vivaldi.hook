@@ -2,7 +2,7 @@
 Type = Package
 Operation = Install
 Operation = Upgrade
-Target = vivaldi-snapshot
+Target = vivaldi
 
 [Action]
 Description = Apply UltCombo's Vivaldi customizations

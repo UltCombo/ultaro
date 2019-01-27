@@ -7,7 +7,7 @@ int main(int argc, char *argv[], char *envp[]) {
     gdk_window_get_pointer(NULL, NULL, NULL, &button_state);
 
     if (button_state & GDK_SHIFT_MASK) {
-        execvp("vivaldi-snapshot", argv);
+        execvp("vivaldi-stable", argv);
     } else {
         char *args[argc + 1];
 
@@ -17,6 +17,6 @@ int main(int argc, char *argv[], char *envp[]) {
 
         args[argc] = "--incognito";
 
-        execvp("vivaldi-snapshot", args);
+        execvp("vivaldi-stable", args);
     }
 }
