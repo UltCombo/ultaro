@@ -13,12 +13,18 @@
       <description>Sets the number of column of emojis to display.</description>
     </key>
     <key type="i" name="emojisize">
-      <default>32</default>
+      <default>30</default>
       <summary>Default size of emojis</summary>
       <description>Default size of emojis (px) ; doesn't concern recently used items</description>
     </key>
     <key type="s" name="recents">
-      <default>'😂,❤️,😍,😭,😊,😒,😘,😩,🤔,☺️,👌,😔,😏,😁,😉,👍,😱,😳,😎,👀,💩,'</default>
+      <default>''</default>
+      <summary>deprecated</summary>
+<!--      FIXME TODO delete this-->
+      <description></description>
+    </key>
+    <key type="as" name="recently-used">
+      <default>['😂','❤️','😍','😭','😊','😒','😘','😩','🤔','☺️','👌','😔','😏','😁','😉','👍','😱','😳','😎','👀','💩']</default>
       <summary>default memorized emojis</summary>
       <description></description>
     </key>
