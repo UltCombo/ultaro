@@ -29,10 +29,6 @@ sudo pacman -Rns --noconfirm tlp manjaro-hello manjaro-gnome-maia-theme manjaro-
 sudo pacman -S --needed --noconfirm base-devel yaourt yarn python-pip git hub fish docker mongodb chrome-gnome-shell xorg-xprop xorg-xkill xclip shotwell vlc papirus-icon-theme noto-fonts-emoji vivaldi vivaldi-ffmpeg-codecs pepper-flash slack-desktop
 yaourt -S --needed --noconfirm visual-studio-code-bin watchman shadowsocks-qt5 shutter stacer nvm terraform ttf-fira-code
 pip install --user --upgrade awscli
-curl -sSL https://www.astrill.com/downloads/astrill-setup-linux64.sh > astrill-setup-linux64.sh
-chmod +x astrill-setup-linux64.sh
-sudo ./astrill-setup-linux64.sh --sudo
-rm astrill-setup-linux64.sh
 sudo pacman -Sc --noconfirm
 
 # Set up desktop files and default applications.
