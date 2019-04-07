@@ -28,10 +28,10 @@ grep -qF 'ILoveCandy' /etc/pacman.conf || sudo sed -i'' '/# Misc options/a ILove
 grep -qF '[herecura]' /etc/pacman.conf || cat pacman/repos.conf | sudo tee -a /etc/pacman.conf
 sudo pacman -Syu
 remove_packages tlp manjaro-hello manjaro-gnome-maia-theme manjaro-gnome-assets nautilus-empty-file bijiben gnome-screenshot empathy telepathy-accounts-signon ms-office-online libreoffice-fresh brasero gthumb totem grilo-plugins firefox
-sudo pacman -S --needed --noconfirm base-devel yaourt yarn python-pip git hub fish docker mongodb chrome-gnome-shell xorg-xprop xorg-xkill xclip shotwell vlc papirus-icon-theme noto-fonts-emoji vivaldi vivaldi-ffmpeg-codecs pepper-flash slack-desktop
-yaourt -S --needed --noconfirm visual-studio-code-bin watchman shadowsocks-qt5 shutter stacer nvm terraform ttf-fira-code
+sudo pacman -S --needed --noconfirm base-devel yay yarn python-pip git hub fish docker mongodb chrome-gnome-shell xorg-xprop xorg-xkill xclip shotwell vlc papirus-icon-theme noto-fonts-emoji vivaldi vivaldi-ffmpeg-codecs pepper-flash slack-desktop
+yay -S --needed --noconfirm visual-studio-code-bin watchman shadowsocks-qt5 shutter stacer nvm terraform ttf-fira-code
 pip install --user --upgrade awscli
-sudo pacman -Scc --noconfirm
+sudo yay -Scc --noconfirm
 
 # Set up desktop files and default applications.
 sudo ln -f browser_launcher/bin/* /usr/bin/
