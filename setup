@@ -11,25 +11,27 @@ if [ "$(id -u)" -eq 0 ]; then
   exit 1
 fi
 
+. util/remove_packages.sh
+
 # Set up Network Manager.
 sudo ln -f network-manager/* /etc/NetworkManager/conf.d/
 
 # Set up AdGuard DNS.
-echo $'\nname_servers="176.103.130.130 176.103.130.131"' | sudo tee -a /etc/resolvconf.conf
+grep -qF '176.103.130.130' /etc/resolvconf.conf || echo $'\nname_servers="176.103.130.130 176.103.130.131"' | sudo tee -a /etc/resolvconf.conf
 sudo resolvconf -u
 
 # Set up Pacman hooks.
 ./vivaldi/install-customizations
 sudo ln -f pacman/hooks/* /usr/share/libalpm/hooks/
 
-sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
-cat pacman/repos.conf | sudo tee -a /etc/pacman.conf
+grep -qF 'ILoveCandy' /etc/pacman.conf || sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
+grep -qF '[herecura]' /etc/pacman.conf || cat pacman/repos.conf | sudo tee -a /etc/pacman.conf
 sudo pacman -Syu
-sudo pacman -Rns --noconfirm tlp manjaro-hello manjaro-gnome-maia-theme manjaro-gnome-assets nautilus-empty-file bijiben gnome-screenshot empathy telepathy-accounts-signon ms-office-online libreoffice-fresh brasero gthumb totem grilo-plugins firefox
+remove_packages tlp manjaro-hello manjaro-gnome-maia-theme manjaro-gnome-assets nautilus-empty-file bijiben gnome-screenshot empathy telepathy-accounts-signon ms-office-online libreoffice-fresh brasero gthumb totem grilo-plugins firefox
 sudo pacman -S --needed --noconfirm base-devel yaourt yarn python-pip git hub fish docker mongodb chrome-gnome-shell xorg-xprop xorg-xkill xclip shotwell vlc papirus-icon-theme noto-fonts-emoji vivaldi vivaldi-ffmpeg-codecs pepper-flash slack-desktop
 yaourt -S --needed --noconfirm visual-studio-code-bin watchman shadowsocks-qt5 shutter stacer nvm terraform ttf-fira-code
 pip install --user --upgrade awscli
-sudo pacman -Sc --noconfirm
+sudo pacman -Scc --noconfirm
 
 # Set up desktop files and default applications.
 sudo ln -f browser_launcher/bin/* /usr/bin/
@@ -40,8 +42,8 @@ ln -f config/* ~/.config/
 sudo ln -f fonts/* /etc/fonts/
 
 # Set up $PATH.
-echo PATH="$(yarn global bin):~/.local/bin:\$PATH" >> ~/.bash_profile
-fish --command 'set -U fish_user_paths (yarn global bin) ~/.local/bin $fish_user_paths'
+grep -qF "$(yarn global bin)" ~/.bash_profile || echo PATH="$(yarn global bin):~/.local/bin:\$PATH" >> ~/.bash_profile
+fish --command 'echo $fish_user_paths | grep -qF (yarn global bin) || set -U fish_user_paths (yarn global bin) ~/.local/bin $fish_user_paths'
 
 # Set up Docker.
 sudo gpasswd -a "$(whoami)" docker
@@ -53,11 +55,11 @@ ln -f fish/functions/* ~/.config/fish/functions/
 ./fish/theme.fish
 ./fish/abbr.fish
 sudo chown -R "$(whoami)" /usr/share/nvm
-echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
-echo 'set -gx NVM_DIR /usr/share/nvm' >> ~/.config/fish/config.fish
+grep -qF 'init-nvm.sh' ~/.bashrc || echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
+grep -qF 'NVM_DIR' ~/.config/fish/config.fish || echo 'set -gx NVM_DIR /usr/share/nvm' >> ~/.config/fish/config.fish
 curl -sSL https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish > ~/.config/fish/functions/nvm.fish
 fish --command 'nvm install 10'
-echo 'nvm use 10' >> ~/.config/fish/config.fish
+grep -qF 'nvm use' ~/.config/fish/config.fish || echo 'nvm use 10' >> ~/.config/fish/config.fish
 
 # Set up GNOME.
 timedatectl set-ntp 1
@@ -106,8 +108,7 @@ ln -f shutter/profiles/* ~/.shutter/profiles/
 
 # Set up GNOME extensions.
 dconf load /org/gnome/shell/extensions/ < dconf/extensions.conf
-rm -rf ~/.local/share/gnome-shell/extensions
-ln -s "$(pwd)/extensions" ~/.local/share/gnome-shell/extensions
+ln -sf "$(pwd)"/extensions/* ~/.local/share/gnome-shell/extensions/
 for extension in extensions/*; do
   gnome-shell-extension-tool -e "$(basename "$extension")"
 done
