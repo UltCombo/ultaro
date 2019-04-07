@@ -12,7 +12,7 @@ Actions=switch-profile-ult;switch-profile-work;
 
 [Desktop Action switch-profile-ult]
 Name=Switch to Ult profile
-Exec=/usr/bin/vivaldi-stable --profile-directory=ult
+Exec=/usr/bin/vivaldi-stable --profile-directory="Profile 1"
 
 [Desktop Action switch-profile-work]
 Name=Switch to Work profile
