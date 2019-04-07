@@ -12,5 +12,7 @@ get_installed() {
 
 remove_packages() {
   installed="$(get_installed "$@")"
-  [ -n "$installed" ] && sudo pacman -Rns --noconfirm $installed
+  if [ -n "$installed" ]; then
+    sudo pacman -Rns --noconfirm $installed
+  fi
 }
