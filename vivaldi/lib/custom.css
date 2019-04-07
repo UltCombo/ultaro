@@ -28,12 +28,6 @@
   z-index: 1;
 }
 
-/* Hide reload and home buttons */
-.toolbar-addressbar .reload,
-.toolbar-addressbar .home {
-  display: none;
-}
-
 /* Start page */
 #browser.address-off .startpage-navigation {
   min-height: 65px;
