@@ -24,13 +24,8 @@ sudo resolvconf -u
 ./vivaldi/install-customizations
 sudo ln -f pacman/hooks/* /usr/share/libalpm/hooks/
 
-# Set up GNOME extensions.
+# Set up GNOME extensions configs.
 dconf load /org/gnome/shell/extensions/ < dconf/extensions.conf
-mkdir -p ~/.local/share/gnome-shell/extensions
-ln -sf "$(pwd)"/extensions/* ~/.local/share/gnome-shell/extensions/
-for extension in extensions/*; do
-  gnome-shell-extension-tool -e "$(basename "$extension")" || true
-done
 
 grep -qF 'ILoveCandy' /etc/pacman.conf || sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
 grep -qF '[herecura]' /etc/pacman.conf || cat pacman/repos.conf | sudo tee -a /etc/pacman.conf
@@ -41,6 +36,16 @@ yay -S --needed --noconfirm visual-studio-code-bin watchman shadowsocks-qt5 shut
 yay -Sd --needed --noconfirm gnome-shell-extension-clipboard-indicator-git gnome-shell-extension-dash-to-dock-git gnome-shell-extension-dynamic-top-bar-git gnome-shell-extension-emoji-selector-git gnome-shell-extension-hidetopbar-git gnome-shell-extension-middleclickclose-git gnome-shell-extension-panel-osd-git gnome-shell-extension-unite-git
 pip install --user --upgrade awscli
 sudo yay -Scc --noconfirm
+
+mkdir -p ~/.local/share/gnome-shell/extensions
+ln -sf "$(pwd)"/extensions/* ~/.local/share/gnome-shell/extensions/
+for extension in extensions/*; do
+  gnome-shell-extension-tool -e "$(basename "$extension")" || true
+done
+
+for extension in clipboard-indicator@tudmotu.com dash-to-dock@micxgx.gmail.com dynamicTopBar@gnomeshell.feildel.fr emoji-selector@maestroschan.fr hidetopbar@mathieu.bidon.ca middleclickclose@paolo.tranquilli.gmail.com panel-osd@berend.de.schouwer.gmail.com unite@hardpixel.eu; do
+  gnome-shell-extension-tool -e "$extension" || true
+done
 
 # Set up desktop files and default applications.
 sudo ln -f browser_launcher/bin/* /usr/bin/
