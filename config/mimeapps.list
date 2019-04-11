@@ -6,6 +6,7 @@ image/png=org.gnome.gThumb.desktop;shotwell-viewer.desktop;
 image/jpeg=shotwell-viewer.desktop;
 
 [Default Applications]
+inode/directory=org.gnome.Nautilus.desktop
 text/html=browser-launcher.desktop
 x-scheme-handler/http=browser-launcher.desktop
 x-scheme-handler/https=browser-launcher.desktop
