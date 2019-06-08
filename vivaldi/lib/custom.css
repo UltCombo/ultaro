@@ -5,8 +5,13 @@
 }
 */
 
-/* Hide window controls and menu */
-#titlebar {
+#header {
+  min-height: 0;
+}
+
+/* Hide window controls, menu and new tab button */
+#titlebar,
+#tabs-container .newtab {
   display: none;
 }
 
@@ -14,17 +19,12 @@
   padding: 0 !important;
 }
 
-/* Hide new tab button */
-#tabs-container .newtab {
-  display: none;
-}
-
 /* Adjust tabs container size */
-#tabs-container .resize {
+#tabs-container.top .resize {
   margin-right: -63px;
 }
 
-#tabs-container .sync-and-trash-container {
+#tabs-container.top .sync-and-trash-container {
   z-index: 1;
 }
 
