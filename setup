@@ -31,8 +31,8 @@ grep -qF 'ILoveCandy' /etc/pacman.conf || sudo sed -i'' '/# Misc options/a ILove
 grep -qF '[herecura]' /etc/pacman.conf || cat pacman/repos.conf | sudo tee -a /etc/pacman.conf
 sudo pacman -Syu --noconfirm
 remove_packages tlp manjaro-hello manjaro-gdm-theme manjaro-gnome-assets nautilus-empty-file gnome-notes gnome-screenshot empathy telepathy-accounts-signon ms-office-online libreoffice-fresh libreoffice-still brasero gthumb totem grilo-plugins firefox
-sudo pacman -S --needed --noconfirm base-devel yay yarn python-pip git hub fish docker chrome-gnome-shell xorg-xprop xorg-xkill xclip shotwell vlc papirus-icon-theme noto-fonts-emoji vivaldi vivaldi-ffmpeg-codecs pepper-flash slack-desktop
-yay -S --needed --noconfirm visual-studio-code-bin watchman shadowsocks-qt5 shutter stacer nvm terraform ttf-fira-code
+sudo pacman -S --needed --noconfirm base-devel yay yarn python-pip git hub fish docker chrome-gnome-shell xorg-xprop xorg-xkill xclip flameshot shotwell vlc papirus-icon-theme noto-fonts-emoji vivaldi vivaldi-ffmpeg-codecs pepper-flash slack-desktop
+yay -S --needed --noconfirm visual-studio-code-bin watchman shadowsocks-qt5 stacer nvm terraform ttf-fira-code
 yay -Sd --needed --noconfirm gnome-shell-extension-clipboard-indicator-git gnome-shell-extension-dash-to-dock-git gnome-shell-extension-dynamic-top-bar-git gnome-shell-extension-emoji-selector-git gnome-shell-extension-hidetopbar-git gnome-shell-extension-middleclickclose-git gnome-shell-extension-panel-osd-git gnome-shell-extension-unite-git
 pip install --user --upgrade awscli
 sudo yay -Scc --noconfirm
@@ -100,7 +100,9 @@ gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', 
 gsettings set org.gtk.Settings.FileChooser sort-directories-first true
 gsettings set org.gtk.Settings.FileChooser show-hidden true
 
-# Replace gnome-screenshot keybindings with shutter.
+# Replace gnome-screenshot keybindings with flameshot.
+SCREENSHOT_PATH="$HOME/Pictures/Screenshots"
+mkdir -p "$SCREENSHOT_PATH"
 gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ''
 gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot-clip ''
 gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot ''
@@ -108,17 +110,15 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot-cli
 gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot ''
 gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip ''
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Shutter - capture desktop"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "shutter --full --profile=silent"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Flameshot - capture full"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "flameshot full -p '$SCREENSHOT_PATH'"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "Print"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name "Shutter - capture window"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "shutter --window --profile=silent"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name "Flameshot - capture screen"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "flameshot screen -p '$SCREENSHOT_PATH'"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding "<Ctrl>Print"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name "Shutter - capture selection"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command "shutter --select --profile=silent"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name "Flameshot - capture GUI"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command "flameshot gui -p '$SCREENSHOT_PATH'"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding "<Shift>Print"
-mkdir -p ~/.shutter/profiles
-ln -f shutter/profiles/* ~/.shutter/profiles/
 
 # Don't suspend when lid is closed.
 sudo sed -i'' -E 's/.*(HandleLidSwitch=).*/\1ignore/' /etc/systemd/logind.conf
@@ -128,7 +128,7 @@ echo 'fs.inotify.max_user_watches=524288' | sudo tee /etc/sysctl.d/40-max-user-w
 sudo sysctl --system
 
 # Set up startup applications and services.
-ln -f autostart/* ~/.config/autostart/
+flameshot config --autostart true
 sudo systemctl mask --now man-db.timer
 
 # Clean up.
@@ -141,6 +141,7 @@ cat << EOF
 # Manual config
 #
 
+Import Flameshot config (flameshot/flameshot.conf)
 VS Code Sync Settings: https://gist.github.com/UltCombo/6107218148de04eb7b2165b5a4c00645
 DuckDuckGo search template: https://duckduckgo.com/?q=%s&t=vivaldi&kae=d&k1=-1&kaj=m&kam=osm&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&kau=-1&k5=2&k7=282c34&kj=21252b&k9=98c379&kx=61afef
 EOF

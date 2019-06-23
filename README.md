@@ -35,7 +35,7 @@ The dock and top bar can be revealed by pushing the cursor towards the edge of s
 
 The application switcher (`Alt`+`Tab`) also works similarly to the MacOS implementation, grouping windows by application and allowing to quit selected applications by pressing `Q`. Displaying just applications instead of all application windows allows reaching the desired target faster. As a further UX enhancement, the application switcher allows selecting a specific window from the selected application with `Alt`+`` ` `` as well as closing windows by pressing `W` without leaving the switcher interface.
 
-The screenshot tool also improves upon the MacOS implementation, providing more features and better usability. It provides similar capture options such as full desktop (`Print`), specific window (`Ctrl`+`Print`) and selection (`Shift`+`Print`). The selection capture provides extra features such as a zoom window for precise captures, allows dragging the selection and also provides keyboard keys to resize and move the selection precisely.
+The screenshot tool also improves upon the MacOS implementation, providing more features and better usability. It provides similar capture options such as full desktop (`Print`), current screen (`Ctrl`+`Print`) and GUI/selection (`Shift`+`Print`). The GUI capture provides extra features such as adjusting the selection and drawing on it.
 
 As a rule of thumb, unnecessary elements should be removed to prevent distractions and preserve user focus. Such unnecessary elements include:
 
