@@ -2,7 +2,7 @@
 application/x-shellscript=visual-studio-code-insiders.desktop;org.gnome.gedit.desktop;
 text/css=visual-studio-code-insiders.desktop;
 application/javascript=visual-studio-code-insiders.desktop;
-image/png=org.gnome.gThumb.desktop;shotwell-viewer.desktop;
+image/png=shotwell-viewer.desktop;
 image/jpeg=shotwell-viewer.desktop;
 
 [Default Applications]
