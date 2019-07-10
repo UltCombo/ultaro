@@ -47,10 +47,10 @@ for extension in clipboard-indicator@tudmotu.com dash-to-dock@micxgx.gmail.com d
   gnome-shell-extension-tool -e "$extension" || true
 done
 
-# Set up desktop files and default applications.
+# Set up configs, desktop files and default applications.
+cp -rlf config/* ~/.config/
 sudo ln -f browser_launcher/bin/* /usr/bin/
 ln -f desktop/* ~/.local/share/applications/
-ln -f config/* ~/.config/
 
 # Set up fonts.
 sudo ln -f fonts/* /etc/fonts/
@@ -141,7 +141,6 @@ cat << EOF
 # Manual config
 #
 
-Import Flameshot config (flameshot/flameshot.conf)
 VS Code Sync Settings: https://gist.github.com/UltCombo/6107218148de04eb7b2165b5a4c00645
 DuckDuckGo search template: https://duckduckgo.com/?q=%s&t=vivaldi&kae=d&k1=-1&kaj=m&kam=osm&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&kau=-1&k5=2&k7=282c34&kj=21252b&k9=98c379&kx=61afef
 EOF
