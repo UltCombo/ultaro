@@ -35,7 +35,8 @@ sudo pacman -S --needed --noconfirm base-devel yay yarn python-pip git hub fish 
 yay -S --needed --noconfirm visual-studio-code-bin watchman shadowsocks-qt5 stacer nvm terraform ttf-fira-code
 yay -Sd --needed --noconfirm gnome-shell-extension-clipboard-indicator-git gnome-shell-extension-dash-to-dock-git gnome-shell-extension-dynamic-top-bar-git gnome-shell-extension-emoji-selector-git gnome-shell-extension-hidetopbar-git gnome-shell-extension-middleclickclose-git gnome-shell-extension-panel-osd-git gnome-shell-extension-unite-git
 pip install --user --upgrade awscli
-sudo yay -Scc --noconfirm
+yay -Yc --noconfirm
+yes | yay -Scc
 
 mkdir -p ~/.local/share/gnome-shell/extensions
 ln -sf "$(pwd)"/extensions/* ~/.local/share/gnome-shell/extensions/
