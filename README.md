@@ -1,6 +1,6 @@
 # Ultaro
 
-Ultaro is a minimalistic, secure, performant, beautiful desktop environment with power users in mind.
+Ultaro is a batteries-included yet minimalistic, secure, performant, beautiful desktop environment with power users in mind.
 
 Based on [GNOME](https://www.gnome.org/gnome-3/), Ultaro draws inspiration from the best parts of MacOS and Windows with further UX enhancements.
 
@@ -19,7 +19,7 @@ git clone --depth 1 https://github.com/UltCombo/ultaro.git
 
 ### Performance, security and freshness
 
-Ultaro is a set of modifications and customizations on top of Manjaro Linux. Manjaro Linux, being based on Arch Linux, is an always up-to-date distribution with the latest kernels and packages. This is invaluable to performance and security. It also provides an excellent package manager with hooks support, which greatly facilitates customizing software while keeping it up-to-date.
+Ultaro is a set of modifications and customizations on top of Manjaro Linux. Manjaro Linux, being based on Arch Linux, is an always up-to-date distribution with the latest kernels and packages. This is essential to performance and security. It also provides an excellent package manager with hooks support, which greatly facilitates customizing software while keeping it up-to-date.
 
 ### User experience
 
@@ -29,7 +29,7 @@ Maximizing an application window automatically hides the top bar, dock and windo
 
 The dock and top bar can be revealed by pushing the cursor towards the edge of screen, similarly to other implementations such as MacOS but with notable UX improvements:
 
-- It implements the concept of "pressure", the user has to push the cursor further than the edge of the screen to reveal the off-screen elements. This prevents accidental triggers by hovering elements near edge of the screen, while keeping the off-screen elements easily accessible by a single quick swipe with the pointing device.
+- The GNOME desktop environment implements the concept of *pressure*: the user has to push the cursor further than the edge of the screen to reveal the off-screen elements. This prevents accidental triggers by hovering elements near edge of the screen, while keeping the off-screen elements easily accessible by a single quick swipe with the pointing device.
 
 - Application windows can be maximized taking the whole viewport. This an improvement over other implementations such as MacOS that reserve a small hover area to reveal off-screen elements: that simply does not work as good as the pressure concept and just wastes screen real estate.
 
@@ -55,15 +55,15 @@ Ultaro provides Vivaldi as the default web browser. It is basically an improved 
 
 Ultaro promotes installing as few native applications and packages as possible without negatively affecting user experience. Every package is seen as a possible point of failure: they have full access to disk and network, thus a single compromised registry or maintainer may result in stolen private documents and credentials.
 
-As such, web applications should be preferred over native applications. Web applications are always up-to-date and run inside a secure sandboxed environment with strict permissions management. Web applications are also cross-platform: being more accessible means people on different platforms can collaborate using the same tools. The [Web platform](https://en.wikipedia.org/wiki/Web_platform) is thus the ultimate applications delivery platform.
+As such, web applications should be preferred over native applications. Web applications are always up-to-date and run inside a secure sandboxed environment with strict permissions management. Web applications are also cross-platform: being more accessible means people on different platforms can collaborate using the same tools. The [Web platform](https://en.wikipedia.org/wiki/Web_platform) is thus the ultimate applications delivery platform, and Ultaro promotes it.
 
 ## Misc
 
 ### What is the motivation behind Ultaro?
 
-I've used MacOS for 3 years and Windows for over a decade. As a power user, I always felt that these desktop environments never suited my needs completely. Although MacOS generally provides excellent UX, the lack of customization became a killer after a couple years bearing its limitations and shortcomings.
+I've used MacOS for 3 years and Windows for over a decade. As a power user, I always felt that these desktop environments never suited my needs completely. Although MacOS generally provides good UX, the lack of customization became unbearable after years withstanding its limitations and shortcomings. Apple is also known for promoting unhealthy, toxic overwork culture, as well as selling overpriced products in developing countries. These practices should not be tolerated nor promoted.
 
-I've been developing, experiencing and evolving my desktop environment for over 6 months before open-sourcing it as Ultaro. My goal is to provide a desktop environment that is simple and pleasant for power users to use.
+I've been developing, experiencing and evolving my desktop environment for one year before launching it as Ultaro. My goal is to provide a desktop environment that is simple and pleasant for power users to use.
 
 ### Why the Mega Man wallpapers?
 
