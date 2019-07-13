@@ -15,6 +15,8 @@ git clone --depth 1 https://github.com/UltCombo/ultaro.git
 ./ultaro/setup
 ```
 
+The setup script is mostly [idempotent](https://en.wikipedia.org/wiki/Idempotence), meaning it can be run again to update Ultaro or in case of unexpected failures.
+
 ## Guiding principles
 
 ### Performance, security and freshness
