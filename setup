@@ -73,8 +73,8 @@ sudo chown -R "$(whoami)" /usr/share/nvm
 grep -qF 'init-nvm.sh' ~/.bashrc || echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
 grep -qF 'NVM_DIR' ~/.config/fish/config.fish || echo 'set -gx NVM_DIR /usr/share/nvm' >> ~/.config/fish/config.fish
 curl -sSL https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish > ~/.config/fish/functions/nvm.fish
-fish --command 'nvm install 10'
-grep -qF 'nvm use' ~/.config/fish/config.fish || echo 'nvm use 10' >> ~/.config/fish/config.fish
+fish --command 'nvm install 12'
+grep -qF 'nvm use' ~/.config/fish/config.fish || echo 'nvm use 12' >> ~/.config/fish/config.fish
 
 # Set up GNOME.
 timedatectl set-ntp 1
