@@ -23,7 +23,7 @@ abbr g 'git'
 # Docker.
 abbr db 'docker image build -t'
 abbr dr 'docker container run'
-abbr dp 'docker system prune -af'
+abbr dp 'docker system prune -af --volumes'
 abbr d 'docker'
 
 # Utilities.
