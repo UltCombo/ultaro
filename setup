@@ -13,9 +13,6 @@ fi
 
 . util/remove_packages.sh
 
-# Set up Network Manager.
-sudo ln -f network-manager/* /etc/NetworkManager/conf.d/
-
 # Set up Pacman hooks.
 ./vivaldi/install-customizations
 sudo ln -f pacman/hooks/* /usr/share/libalpm/hooks/
@@ -26,22 +23,23 @@ dconf load /org/gnome/shell/extensions/ < dconf/extensions.conf
 grep -qF 'ILoveCandy' /etc/pacman.conf || sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
 grep -qF '[herecura]' /etc/pacman.conf || cat pacman/repos.conf | sudo tee -a /etc/pacman.conf
 sudo pacman -Syu --noconfirm
-remove_packages tlp manjaro-hello manjaro-gdm-theme manjaro-gnome-assets nautilus-empty-file gnome-notes gnome-screenshot empathy telepathy-accounts-signon ms-office-online libreoffice-fresh libreoffice-still brasero gthumb totem grilo-plugins firefox
+remove_packages tlp manjaro-hello manjaro-gdm-theme manjaro-gnome-assets nautilus-empty-file gnome-screenshot gthumb totem grilo-plugins
 sudo pacman -S --needed --noconfirm base-devel yay yarn python-pip git hub fish docker chrome-gnome-shell xorg-xprop xorg-xkill xclip flameshot nomacs vlc papirus-icon-theme noto-fonts-emoji vivaldi vivaldi-ffmpeg-codecs pepper-flash slack-desktop libappindicator-gtk2 libappindicator-gtk3 openresolv dnsmasq
-yay -S --needed --noconfirm visual-studio-code-bin watchman shadowsocks-qt5 stacer nvm terraform ttf-fira-code
-yay -Sd --needed --noconfirm gnome-shell-extension-clipboard-indicator-git gnome-shell-extension-dash-to-dock-git gnome-shell-extension-dynamic-top-bar-git gnome-shell-extension-emoji-selector-git gnome-shell-extension-hidetopbar-git gnome-shell-extension-middleclickclose-git gnome-shell-extension-panel-osd-git gnome-shell-extension-unite-git gnome-shell-extension-appindicator-git gnome-shell-extension-gsconnect-git
+yay -S --needed --noconfirm visual-studio-code-bin watchman stacer nvm terraform ttf-fira-code
+yay -Sd --needed --noconfirm gnome-shell-extension-clipboard-indicator-git gnome-shell-extension-dash-to-dock-git gnome-shell-extension-dynamic-top-bar-git gnome-shell-extension-emoji-selector-git gnome-shell-extension-unite-git gnome-shell-extension-appindicator-git gnome-shell-extension-gsconnect
+# Temporarily disabled due to PKGBUILD error: gnome-shell-extension-hidetopbar-git gnome-shell-extension-middleclickclose-git
 pip install --user --upgrade awscli
 yay -Yc --noconfirm
-yes | yay -Scc
+yes | yay -Scc || true
 
 mkdir -p ~/.local/share/gnome-shell/extensions
 ln -sf "$(pwd)"/extensions/* ~/.local/share/gnome-shell/extensions/
 for extension in extensions/*; do
-  gnome-shell-extension-tool -e "$(basename "$extension")" || true
+  gnome-extensions enable "$(basename "$extension")" || true
 done
 
-for extension in clipboard-indicator@tudmotu.com dash-to-dock@micxgx.gmail.com dynamicTopBar@gnomeshell.feildel.fr emoji-selector@maestroschan.fr hidetopbar@mathieu.bidon.ca middleclickclose@paolo.tranquilli.gmail.com panel-osd@berend.de.schouwer.gmail.com unite@hardpixel.eu appindicatorsupport@rgcjonas.gmail.com gsconnect@andyholmes.github.io; do
-  gnome-shell-extension-tool -e "$extension" || true
+for extension in clipboard-indicator@tudmotu.com dash-to-dock@micxgx.gmail.com dynamicTopBar@gnomeshell.feildel.fr emoji-selector@maestroschan.fr hidetopbar@mathieu.bidon.ca middleclickclose@paolo.tranquilli.gmail.com unite@hardpixel.eu appindicatorsupport@rgcjonas.gmail.com gsconnect@andyholmes.github.io; do
+  gnome-extensions enable "$extension" || true
 done
 
 # Set up configs, desktop files and default applications.
@@ -54,6 +52,10 @@ nomacs --import-settings nomacs/nomacs.ini
 # Set up dnsmasq as DNS server.
 sudo systemctl enable --now dnsmasq
 grep -qF '::1' /etc/resolvconf.conf || echo $'\nname_servers="::1 127.0.0.1"' | sudo tee -a /etc/resolvconf.conf
+
+# Set up Network Manager.
+sudo ln -f network-manager/* /etc/NetworkManager/conf.d/
+
 sudo resolvconf -u
 
 # Set up fonts.
@@ -97,22 +99,18 @@ gsettings set org.gnome.desktop.notifications show-in-lock-screen false
 gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/images/wallpaper.jpg"
 gsettings set org.gnome.desktop.screensaver picture-uri "file://$(pwd)/images/lock_screen.jpg"
 gsettings set org.gnome.shell favorite-apps "['vivaldi-stable.desktop', 'visual-studio-code.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
-# gsettings set org.gnome.system.proxy mode 'manual'
-gsettings set org.gnome.system.proxy.socks host '127.0.0.1'
-gsettings set org.gnome.system.proxy.socks port 1080
-gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '10.0.0.0/8', '192.168.0.0/16', '172.16.0.0/12']"
 gsettings set org.gtk.Settings.FileChooser sort-directories-first true
 gsettings set org.gtk.Settings.FileChooser show-hidden true
 
 # Replace gnome-screenshot keybindings with flameshot.
 SCREENSHOT_PATH="$HOME/Pictures/Screenshots"
 mkdir -p "$SCREENSHOT_PATH"
-gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ''
-gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot-clip ''
-gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot ''
-gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot-clip ''
-gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot ''
-gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip ''
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot-clip '[]'
+gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot '[]'
+gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot-clip '[]'
+gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot '[]'
+gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip '[]'
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Flameshot - capture full"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "flameshot full -p '$SCREENSHOT_PATH'"
