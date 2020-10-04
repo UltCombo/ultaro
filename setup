@@ -23,7 +23,7 @@ dconf load /org/gnome/shell/extensions/ < dconf/extensions.conf
 grep -qF 'ILoveCandy' /etc/pacman.conf || sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
 grep -qF '[herecura]' /etc/pacman.conf || cat pacman/repos.conf | sudo tee -a /etc/pacman.conf
 sudo pacman -Syu --noconfirm
-remove_packages tlp manjaro-hello manjaro-gdm-theme manjaro-gnome-assets nautilus-empty-file gnome-screenshot gthumb totem grilo-plugins
+remove_packages tlp manjaro-hello manjaro-gdm-theme manjaro-gnome-assets nautilus-empty-file gnome-screenshot gthumb totem caffeine-ng mntray
 sudo pacman -S --needed --noconfirm base-devel yay yarn python-pip git hub fish docker chrome-gnome-shell xorg-xprop xorg-xkill xclip flameshot nomacs vlc papirus-icon-theme noto-fonts-emoji vivaldi vivaldi-ffmpeg-codecs pepper-flash slack-desktop libappindicator-gtk2 libappindicator-gtk3 openresolv dnsmasq
 yay -S --needed --noconfirm visual-studio-code-bin watchman stacer nvm terraform ttf-fira-code
 yay -Sd --needed --noconfirm gnome-shell-extension-clipboard-indicator-git gnome-shell-extension-dash-to-dock-git gnome-shell-extension-dynamic-top-bar-git gnome-shell-extension-emoji-selector-git gnome-shell-extension-unite-git gnome-shell-extension-appindicator-git gnome-shell-extension-gsconnect
