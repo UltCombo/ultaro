@@ -20,6 +20,9 @@ sudo ln -f pacman/hooks/* /usr/share/libalpm/hooks/
 # Set up GNOME extensions configs.
 dconf load /org/gnome/shell/extensions/ < dconf/extensions.conf
 
+# Set up Files config.
+dconf load /org/gnome/nautilus/ < dconf/nautilus.conf
+
 grep -qF 'ILoveCandy' /etc/pacman.conf || sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
 grep -qF '[herecura]' /etc/pacman.conf || cat pacman/repos.conf | sudo tee -a /etc/pacman.conf
 sudo pacman -Syu --noconfirm
@@ -100,7 +103,6 @@ gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/images/wal
 gsettings set org.gnome.desktop.screensaver picture-uri "file://$(pwd)/images/lock_screen.jpg"
 gsettings set org.gnome.shell favorite-apps "['vivaldi-stable.desktop', 'visual-studio-code.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
 gsettings set org.gtk.Settings.FileChooser sort-directories-first true
-gsettings set org.gtk.Settings.FileChooser show-hidden true
 
 # Replace gnome-screenshot keybindings with flameshot.
 SCREENSHOT_PATH="$HOME/Pictures/Screenshots"
