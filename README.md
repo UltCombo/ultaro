@@ -72,3 +72,15 @@ I've been developing, experiencing and evolving my desktop environment for one y
 Mega Man is a super hero: he takes the best parts of its enemies and adapts to handle every situation.
 
 Mega Man is the perfect analogy for Ultaro.
+
+## [ABANDONED - TOO BROKEN] Wayland
+
+push to talk broken
+- replace with gnome keybinding to toggle microphone
+
+vivaldi://flags
+- ozone: auto
+- pipewire: enabled
+
+hotkeys - screenshots
+sharescreen

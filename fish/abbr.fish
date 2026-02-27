@@ -39,3 +39,7 @@ abbr o 'xdg-open'
 abbr t 'npm test'
 abbr cb 'xclip -i -selection clipboard'
 abbr - 'cd -'
+
+abbr -a -- k 'ssh prod-k9s'
+abbr -a -- wga 'sudo wg-quick up atlas'
+abbr -a -- wgd 'sudo wg-quick down atlas'
