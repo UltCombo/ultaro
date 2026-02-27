@@ -78,16 +78,9 @@ sudo gpasswd -a "$(whoami)" docker
 
 # Set up fish, nvm, fast-nvm-fish.
 chsh -s /usr/bin/fish
-mkdir -p ~/.config/fish/functions
-ln -f fish/functions/* ~/.config/fish/functions/
-./fish/theme.fish
-./fish/abbr.fish
 sudo chown -R "$(whoami)" /usr/share/nvm
 grep -qF 'init-nvm.sh' ~/.bashrc || echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
-grep -qF 'NVM_DIR' ~/.config/fish/config.fish || echo 'set -gx NVM_DIR /usr/share/nvm' >> ~/.config/fish/config.fish
-curl -sSL https://raw.githubusercontent.com/brigand/fast-nvm-fish/master/nvm.fish > ~/.config/fish/functions/nvm.fish
-fish --command 'nvm install 16'
-grep -qF 'nvm use' ~/.config/fish/config.fish || echo 'nvm use 16' >> ~/.config/fish/config.fish
+fish --command 'nvm install 24'
 
 # Set up GNOME.
 timedatectl set-ntp 1

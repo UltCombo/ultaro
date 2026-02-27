@@ -1,0 +1,122 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 5
+        separator = " "
+}
+
+#order += "ipv6"
+#order += "ethernet _first_"
+order += "read_file mic"
+order += "volume master"
+#order += "disk /"
+#order += "load"
+order += "cpu_temperature 1"
+order += "cpu_usage"
+order += "memory"
+order += "wireless _first_"
+order += "tztime local"
+order += "battery all"
+order += "read_file dnd"
+order += "read_file powerprofile"
+
+wireless _first_ {
+        #format_up = "W: (%quality at %essid) %ip"
+        format_up = "🛜%quality %essid"
+        format_down = "🛜 down"
+}
+
+ethernet _first_ {
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+
+volume master {
+        format = "🔊 %volume"
+        format_muted = "🔈 muted"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+read_file mic {
+        path = /home/ult/.config/i3status/mic
+}
+
+read_file dnd {
+        path = /home/ult/.config/i3status/dnd
+}
+
+read_file powerprofile {
+        path = /home/ult/.config/i3status/powerprofile
+}
+
+battery all {
+        format = "%status %percentage %remaining"
+        format_percentage = "%.00f%s"
+        # last_full_capacity = true
+        status_chr = "⚡"
+        status_bat = "🔋"
+        status_unk = "?"
+        status_full = "🔌"
+        status_idle = "🔌"
+        low_threshold = 15
+        threshold_type = percentage
+}
+
+disk "/" {
+        format = "%avail"
+}
+
+load {
+        format = "%1min"
+}
+
+cpu_temperature 1 {
+        format = "🌡️%degrees°C"
+        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
+        max_threshold = 90
+}
+
+cpu_usage {
+        # format = "𝐂𝐏𝐔 %usage"
+        # format = "𝐂𝐩𝐮 %usage"
+        # format = "𝐜𝐩𝐮 %usage"
+        format = "🔳 %usage"
+        # format = "🔲 %usage"
+        # format = "▢ %usage"
+        # format = "🞔 %usage"
+        # format = "🞕 %usage"
+        # format = "▣ %usage"
+}
+
+memory {
+        # format = "𝐑𝐚𝐦 %used"
+        # format = "𝐫𝐚𝐦 %used"
+        # format = "🐏 %used"
+        format = "📟 %used"
+        # format = "🎹 %used"
+        # format = "🚥 %used"
+        # format = "▭ %used"
+        # format = "🀰 %used"
+        # format = "𖧕 %used"
+        # format = "𓈜 %used"
+        # format = "𑨑 %used"
+        # format = "▥ %used"
+        # format = "𑩄 %used"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+tztime local {
+        format = "📅 %Y-%m-%d 🕒 %H:%M"
+}
+
+# https://readmedium.com/my-i3status-customization-3e8ad6f0153a
