@@ -239,34 +239,14 @@ bar {
         }
 }
 
-# Ult
-#exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
-
-
 exec --no-startup-id feh --bg-scale /home/ult/workspace/ult/ultaro/images/wallpaper.jpg
-
-#workspace_layout stacking
 
 focus_on_window_activation focus
 
 default_border pixel 1
-#default_border none
-#for_window [class="^Gnome\\-terminal$"] default_border none
-# Hide title bar for stacked/tabbed containers
-#font pango:monospace 0
 hide_edge_borders smart
 
 assign [instance="^vivaldi\-stable$"] tmp
-#assign [class="code"] 2
-#assign [class="slack"] 3
-#assign [class="org.gnome.Terminal"] 4
-
-# exec --no-startup-id "i3-msg 'workspace 1:Web; append_layout /home/ult/.i3/w1.json'; vivaldi"
-# exec --no-startup-id "i3-msg 'workspace 2:Code; append_layout /home/ult/.i3/w2.json'; code"
-# exec --no-startup-id "i3-msg 'workspace 3:Comms; append_layout /home/ult/.i3/w3.json'"
-# exec --no-startup-id "i3-msg 'workspace 4:Terminal; append_layout /home/ult/.i3/w4.json'"
-# exec --no-startup-id "i3-msg 'workspace 5:Files; append_layout /home/ult/.i3/w5.json'"
-# exec --no-startup-id "i3-msg 'workspace 10:Private; append_layout /home/ult/.i3/w10.json'"
 
 set $brightnessNotification dunstify -t 1000 -h string:x-canonical-private-synchronous:brightness -h string:hlcolor:#ffffff -h int:value:$value "☀️ $value%"
 bindsym XF86MonBrightnessUp exec --no-startup-id value="$(brightnessctl set +10% | grep -Pom1 '[0-9]+(?=%)')" && $brightnessNotification
@@ -322,11 +302,8 @@ for_window [instance="^gnome\-calculator$"] floating enable
 for_window [instance="^gnome\-calendar$"] floating enable
 for_window [instance="^nomacs$"] floating enable
 
-# TODO:
-
-# move ~/.i3 to ~/.config/i3 and commit i3, i3status, dunst and picom config to ultaro
-
-# Mic status icons: 🎤 😶 🫢 🤐
-# Volume status icons: ♪ 🎵 🔊 🔈
-# Brightness status icons: ☀ ☀️
-# DND icons: ⛔ 🚫
+### ICONS ###
+# Mic status: 🎤 😶 🫢 🤐
+# Volume status: ♪ 🎵 🔊 🔈
+# Brightness status: ☀ ☀️
+# DND: ⛔ 🚫
