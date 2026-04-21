@@ -36,7 +36,7 @@
     // workspace with 1 children
     "border": "pixel",
     "floating": "auto_off",
-    "layout": "stacked",
+    "layout": "tabbed",
     "marks": [],
     "name": "2:Code",
     "percent": null,
@@ -69,7 +69,7 @@
     // workspace with 1 children
     "border": "pixel",
     "floating": "auto_off",
-    "layout": "splith",
+    "layout": "tabbed",
     "marks": [],
     "name": "3:Comms",
     "percent": null,
