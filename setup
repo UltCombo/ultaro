@@ -58,8 +58,9 @@ cp -rlf config/* ~/.config/
 nomacs --import-settings nomacs/nomacs.ini
 
 # Set up dnsmasq as DNS server.
-sudo systemctl enable --now dnsmasq
-grep -qF '::1' /etc/resolvconf.conf || echo $'\nname_servers="::1 127.0.0.1"' | sudo tee -a /etc/resolvconf.conf
+# sudo systemctl enable --now dnsmasq
+# grep -qF '::1' /etc/resolvconf.conf || echo $'\nname_servers="::1 127.0.0.1"' | sudo tee -a /etc/resolvconf.conf
+grep -qF 'name_servers' /etc/resolvconf.conf || echo $'\nname_servers="8.8.8.8 1.1.1.1"' | sudo tee -a /etc/resolvconf.conf
 
 # Set up Network Manager.
 sudo ln -f network-manager/* /etc/NetworkManager/conf.d/
