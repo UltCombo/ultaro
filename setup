@@ -51,6 +51,7 @@ yes | yay -Scc || true
 
 # Set up configs, desktop files and default applications.
 sudo ln -f etc/* /etc/
+sudo cp -rlf usr/* /usr/
 sudo ln -f browser_launcher/bin/* /usr/bin/
 ln -f desktop/* ~/.local/share/applications/
 cp -rlf config/* ~/.config/
