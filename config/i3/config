@@ -285,7 +285,7 @@ set $openWebPrivateCommand vivaldi --incognito 'https://duckduckgo.com/?q=&t=viv
 
 exec --no-startup-id i3-msg 'append_layout /home/ult/.config/i3/layout.json'
 exec --no-startup-id vivaldi
-exec --no-startup-id sleep 5 && $openWebPrivateCommand && sleep 0.5 && i3-msg 'workspace number 1'
+exec --no-startup-id sleep 5 && $openWebPrivateCommand && sleep 1 && i3-msg 'workspace number 1'
 exec --no-startup-id code
 exec --no-startup-id slack
 exec --no-startup-id gnome-terminal
