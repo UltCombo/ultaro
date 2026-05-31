@@ -54,14 +54,8 @@ nomacs --import-settings nomacs/nomacs.ini
 
 sudo systemctl enable --now thermald
 
-# Set up Network Manager.
-sudo ln -f network-manager/* /etc/NetworkManager/conf.d/
-
 # Set up DNS.
 sudo resolvconf -u
-
-# Set up fonts.
-sudo ln -f fonts/* /etc/fonts/
 
 # Set up Docker.
 sudo gpasswd -a "$(whoami)" docker
