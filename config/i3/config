@@ -272,7 +272,7 @@ bindsym Shift+Print exec --no-startup-id flameshot gui -p /home/ult/Pictures/Scr
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
-bindsym $mod+l exec --no-startup-id loginctl lock-session && sleep 2 && xset dpms force standby
+bindsym $mod+l exec --no-startup-id loginctl lock-session && sleep 1 && xset dpms force standby
 bindsym $mod+n exec --no-startup-id dunstctl history-pop
 bindsym $mod+m exec --no-startup-id i3-input -P 'i3-msg '
 bindsym $mod+c exec --no-startup-id xclip -o | xclip -i -selection clipboard
