@@ -110,7 +110,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 sudo sed -i'' -E 's/.*(HandleLidSwitch=).*/\1ignore/' /etc/systemd/logind.conf
 
 # Set up LightDM autologin.
-grep -qE '^autologin-user=' /etc/lightdm/lightdm.conf || sudo sed -i'' -E '/^\[Seat:\*\]/a autologin-user='"$(whoami)"$'\\\nautologin-user-timeout=0' /etc/lightdm/lightdm.conf
+grep -qE '^autologin-user=' /etc/lightdm/lightdm.conf || sudo sed -i'' -E '/^\[Seat:\*\]/a autologin-user='"$(whoami)"$'\\\nautologin-user-timeout=0\\\nautologin-session=i3' /etc/lightdm/lightdm.conf
 sudo systemctl disable gdm || true
 sudo systemctl enable lightdm
 
