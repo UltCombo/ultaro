@@ -106,6 +106,9 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command "flameshot gui -p '$SCREENSHOT_PATH'"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding "<Shift>Print"
 
+# Fix Adwaita dark mode in i3.
+grep -qE '^ADW_DEBUG_COLOR_SCHEME=' /etc/environment || echo 'ADW_DEBUG_COLOR_SCHEME=prefer-dark' | sudo tee /etc/environment
+
 # Don't suspend when lid is closed.
 sudo sed -i'' -E 's/.*(HandleLidSwitch=).*/\1ignore/' /etc/systemd/logind.conf
 

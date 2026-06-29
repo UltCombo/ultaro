@@ -22,9 +22,6 @@ font pango:sans-serif 9
 # Enable numlock
 exec --no-startup-id numlockx on
 
-# Start compositor to support dunst notification gap transparency.
-exec --no-startup-id picom -b
-
 # Start polkit agent to support privilege escalation (retry as sudo).
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
@@ -158,12 +155,14 @@ set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
-set $ws5 "5"
+set $ws5 "5:HDMI"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+workspace $ws5 output HDMI-1-0
 
 # switch to workspace
 # bindsym $mod+1 workspace number $ws1
@@ -241,6 +240,7 @@ bar {
 	font pango:DejaVu Sans Mono 8
         workspace_command /home/ult/.config/i3/workspace_command.sh
         padding 2px 0
+        tray_output primary
 
         colors {
                 background #1e2227
