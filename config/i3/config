@@ -264,10 +264,9 @@ bindsym XF86MonBrightnessDown exec --no-startup-id value="$(brightnessctl set 10
 bindsym $mod+F6 exec --no-startup-id value="$(brightnessctl set +10% | grep -Pom1 '[0-9]+(?=%)')" && $brightnessNotification
 bindsym $mod+F5 exec --no-startup-id value="$(brightnessctl set 10%- | grep -Pom1 '[0-9]+(?=%)')" && $brightnessNotification
 
-set $copyLastScreenshot xclip -i -selection clipboard -t image/png "/home/ult/Pictures/Screenshots/$(ls -r /home/ult/Pictures/Screenshots/ | head -n 1)"
-bindsym Print exec --no-startup-id flameshot full -p /home/ult/Pictures/Screenshots && $copyLastScreenshot
-bindsym Ctrl+Print exec --no-startup-id flameshot screen -p /home/ult/Pictures/Screenshots && $copyLastScreenshot
-bindsym Shift+Print exec --no-startup-id flameshot gui -p /home/ult/Pictures/Screenshots && $copyLastScreenshot
+bindsym Print exec --no-startup-id flameshot full -p /home/ult/Pictures/Screenshots -c
+bindsym Shift+Print exec --no-startup-id flameshot screen -n 1 -p /home/ult/Pictures/Screenshots -c -e
+bindsym $mod+Shift+Print exec --no-startup-id flameshot screen -n 0 -p /home/ult/Pictures/Screenshots -c -e
 
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
