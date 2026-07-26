@@ -1,5 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+
+set -o pipefail
+
 i3-msg -t subscribe -m '["workspace", "output"]' | {
     i3-msg -t get_workspaces;
     while read EVENT; do i3-msg -t get_workspaces; done;
-} | jq --unbuffered -c '[ .[] | select(.name != "Private") ]'
+} | jq --unbuffered -c '[ .[] | select(.name != "Private") ]' || exec "$0" "$@"

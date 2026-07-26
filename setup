@@ -57,6 +57,22 @@ sudo chown -R "$(whoami)" /usr/share/nvm
 grep -qF 'init-nvm.sh' ~/.bashrc || echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
 fish --command 'nvm install 26'
 
+# Set up portals.
+mkdir -p ~/.config/systemd/user/
+cat <<EOF > ~/.config/systemd/user/i3-session.target
+[Unit]
+Description=i3 session
+BindsTo=graphical-session.target
+Before=graphical-session.target
+EOF
+
+mkdir -p ~/.config/xdg-desktop-portal
+echo -e "[preferred]\ndefault=gtk" > ~/.config/xdg-desktop-portal/portals.conf
+
+# Mask gnome.ScreenSaver
+mkdir -p ~/.local/share/dbus-1/services/
+ln -s /dev/null ~/.local/share/dbus-1/services/org.gnome.ScreenSaver.service
+
 # Set up yarn $PATH.
 # if ! command -v yarn > /dev/null 2>&1; then
 #   . /usr/share/nvm/init-nvm.sh

@@ -40,6 +40,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 1e2227 --pass-m
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# Update env to support portals.
+exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP=i3 XDG_SESSION_TYPE=x11 && systemctl --user start i3-session.target
+
 set $refresh_i3status killall -SIGUSR1 i3status
 
 # Use pactl to adjust volume in PulseAudio.
