@@ -34,11 +34,9 @@ for extension in dash-to-dock@micxgx.gmail.com hidetopbar@mathieu.bidon.ca unred
 done
 
 # Set up configs, desktop files and default applications.
-sudo cp -rlf etc/* /etc/
-sudo cp -rlf usr/* /usr/
+sudo cp -rlf root/. /
 sudo ln -f browser_launcher/bin/* /usr/bin/
-ln -f desktop/* ~/.local/share/applications/
-cp -rlf config/* ~/.config/
+cp -rlf home/. ~/
 nomacs --import-settings nomacs/nomacs.ini
 
 sudo systemctl enable --now thermald
