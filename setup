@@ -140,6 +140,6 @@ flameshot config --autostart true
 sudo systemctl mask --now man-db.timer
 
 # Clean up.
-rm -f ~/Readme ~/Templates/*
+rm -f ~/Readme ~/Templates/* ~/.config/autostart/create-template.desktop ~/.config/autostart/manjaro-tiling-settings.desktop
 
 echo '✨ Setup finished successfully.'
