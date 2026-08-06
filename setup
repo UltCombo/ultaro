@@ -71,7 +71,7 @@ echo -e "[preferred]\ndefault=gtk" > ~/.config/xdg-desktop-portal/portals.conf
 
 # Mask gnome.ScreenSaver
 mkdir -p ~/.local/share/dbus-1/services/
-ln -s /dev/null ~/.local/share/dbus-1/services/org.gnome.ScreenSaver.service
+echo -e "[D-BUS Service]\nName=org.gnome.ScreenSaver\nExec=/bin/true" > ~/.local/share/dbus-1/services/org.gnome.ScreenSaver.service
 
 # Set up yarn $PATH.
 # if ! command -v yarn > /dev/null 2>&1; then
