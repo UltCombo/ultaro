@@ -43,7 +43,7 @@ exec --no-startup-id nm-applet
 # Update env to support portals.
 exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP=i3 XDG_SESSION_TYPE=x11 && systemctl --user start i3-session.target
 
-set $refresh_i3status killall -SIGUSR1 i3status
+set $refresh_i3status killall -SIGUSR1 i3status || true
 
 # Use pactl to adjust volume in PulseAudio.
 set $unmute pactl get-sink-mute @DEFAULT_SINK@ | grep -qF "Mute: yes" && pactl set-sink-mute @DEFAULT_SINK@ 0
@@ -192,7 +192,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c exec --no-startup-id i3-msg reload && killall i3bar || true && i3bar --bar_id=bar-0
+bindsym $mod+Shift+c exec --no-startup-id i3-msg reload && picom -b || true && killall i3bar || true && i3bar --bar_id=bar-0
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -274,10 +274,12 @@ bindsym $mod+Shift+Print exec --no-startup-id flameshot screen -n 0 -p /home/ult
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
-bindsym $mod+l exec --no-startup-id loginctl lock-session && sleep 1 && xset dpms force standby
+bindsym $mod+l exec --no-startup-id loginctl lock-session && sleep 1 && xset dpms force off
 bindsym $mod+n exec --no-startup-id dunstctl history-pop
 bindsym $mod+m exec --no-startup-id i3-input -P 'i3-msg '
 bindsym $mod+c exec --no-startup-id xclip -o | xclip -i -selection clipboard
+bindsym $mod+t exec --no-startup-id dunstify -i time -t 2000 -h string:x-canonical-private-synchronous:time "$(date +'%F %H:%M')"
+bindsym $mod+p exec --no-startup-id killall i3bar picom
 
 set $updateDNDStatus dunstctl is-paused | sed -E -e "s/false//" -e "s/true/⛔/" > /home/ult/.config/i3status/dnd
 exec --no-startup-id $updateDNDStatus
