@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = claude-desktop
+
+[Action]
+Description = Reapplying Claude Desktop title bar + CSS patches...
+When = PostTransaction
+Exec = /usr/local/bin/claude-desktop-patch.sh
