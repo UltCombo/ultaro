@@ -44,6 +44,7 @@ cat > "$WORKDIR/css-patch.js" <<'JSEOF'
 .dframe-pane-scroller { padding: 0 !important; }
 [data-testid="chat-column-body"] { padding-left: calc(var(--spacing) * 2) !important; }
 .dframe-chrome-bar { padding-right: 12px !important; }
+.shrink-0[style*=titlebar-area-width] { display: none !important; }
 `;
 
     app.on('web-contents-created', (_event, contents) => {
