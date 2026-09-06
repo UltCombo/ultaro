@@ -1,0 +1,38 @@
+/* UNITE windowDecorations */
+@import url('/usr/share/gnome-shell/extensions/unite@hardpixel.eu/styles/gtk3/buttons-right/both.css');
+/* windowDecorations UNITE */
+@define-color accent_blue #3584e4;
+@define-color accent_teal #2190a4;
+@define-color accent_green #3a944a;
+@define-color accent_yellow #c88800;
+@define-color accent_orange #ed5b00;
+@define-color accent_red #e62d42;
+@define-color accent_pink #d56199;
+@define-color accent_purple #9141ac;
+@define-color accent_slate #6f8396;
+@define-color accent_maia #16a085;
+@define-color accent_bg_color @accent_teal;
+@define-color accent_color @accent_bg_color;
+
+/* Target the root window node for libadwaita apps */
+window,
+window decoration,
+window decoration:backdrop {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Prevent black blocks from rendering around menus and tooltips */
+/*
+popover,
+.popover,
+.popover.background,
+.menu * {
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    border-radius: 0;
+}
+*/
