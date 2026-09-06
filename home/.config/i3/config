@@ -288,8 +288,8 @@ bindsym $mod+Shift+d exec --no-startup-id dunstctl set-paused toggle && $updateD
 set $openWebPrivateCommand vivaldi --incognito 'https://duckduckgo.com/?q=&t=vivaldi&kae=d&k1=-1&kaj=m&kam=osm&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&kau=-1&k5=2&k7=282c34&kj=21252b&k9=98c379&kx=61afef'
 
 exec --no-startup-id i3-msg 'append_layout /home/ult/.config/i3/layout.json'
-exec --no-startup-id vivaldi
-exec --no-startup-id sleep 5 && $openWebPrivateCommand && sleep 2 && i3-msg 'workspace number 1'
+exec --no-startup-id vivaldi --remote-debugging-port=9222 --remote-allow-origins=http://localhost:9222
+exec --no-startup-id sleep 5 && $openWebPrivateCommand && sleep 5 && python3 /home/ult/.config/i3/play_music.py && i3-msg 'workspace number 1'
 exec --no-startup-id code
 exec --no-startup-id slack
 exec --no-startup-id gnome-terminal
