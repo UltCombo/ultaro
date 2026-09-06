@@ -260,6 +260,8 @@ default_border pixel 1
 hide_edge_borders smart
 
 assign [instance="^vivaldi\-stable$"] tmp
+assign [class="steam"] $ws5
+assign [title="RuneScape"] $ws5
 
 set $brightnessNotification dunstify -t 1000 -h string:x-canonical-private-synchronous:brightness -h string:hlcolor:#ffffff -h int:value:$value "☀️ $value%"
 bindsym XF86MonBrightnessUp exec --no-startup-id value="$(brightnessctl set +10% | grep -Pom1 '[0-9]+(?=%)')" && $brightnessNotification
@@ -294,6 +296,7 @@ exec --no-startup-id code
 exec --no-startup-id slack
 exec --no-startup-id gnome-terminal
 exec --no-startup-id nautilus
+exec --no-startup-id steam -silent
 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 70%
 exec --no-startup-id brightnessctl set $(hour=$(date +%H) && [ "$hour" -ge 19 ] || [ "$hour" -le 6 ] && echo 70 || echo 100)%
 
