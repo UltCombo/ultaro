@@ -99,6 +99,7 @@ gsettings set org.gnome.desktop.screensaver picture-uri "file://$(pwd)/images/lo
 gsettings set org.gnome.shell favorite-apps "['vivaldi-stable.desktop', 'visual-studio-code.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
 gsettings set org.gtk.Settings.FileChooser sort-directories-first true
 gsettings set org.gnome.desktop.peripherals.keyboard numlock-state true
+gsettings set org.gnome.Terminal.Legacy.Profile background-color 'rgb(30,34,39)'
 
 # Replace gnome-screenshot keybindings with flameshot.
 SCREENSHOT_PATH="$HOME/Pictures/Screenshots"
