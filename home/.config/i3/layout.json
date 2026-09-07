@@ -132,7 +132,7 @@
 }
 
 {
-    // workspace with 1 children
+    // workspace with 2 children
     "border": "pixel",
     "floating": "auto_off",
     "layout": "splith",
@@ -146,18 +146,38 @@
             "current_border_width": 1,
             "floating": "auto_off",
             "geometry": {
-               "height": 434,
-               "width": 736,
-               "x": 0,
-               "y": 0
+                "height": 1078,
+                "width": 958,
+                "x": 1,
+                "y": 1
+            },
+            "marks": [],
+            "name": "Claude",
+            "percent": 0.6,
+            "swallows": [
+                {
+                    "instance": "^com\\.anthropic\\.claude$"
+                }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+                "height": 434,
+                "width": 736,
+                "x": 0,
+                "y": 0
             },
             "marks": [],
             "name": "Terminal",
-            "percent": 1,
+            "percent": 0.4,
             "swallows": [
-               {
-               "instance": "^org\\.gnome\\.Terminal$"
-               }
+                {
+                    "instance": "^org\\.gnome\\.Terminal$"
+                }
             ],
             "type": "con"
         }

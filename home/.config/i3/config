@@ -294,8 +294,9 @@ exec --no-startup-id vivaldi --remote-debugging-port=9222 --remote-allow-origins
 exec --no-startup-id sleep 5 && $openWebPrivateCommand && sleep 5 && python3 /home/ult/.config/i3/play_music.py && i3-msg 'workspace number 1'
 exec --no-startup-id code
 exec --no-startup-id slack
-exec --no-startup-id gnome-terminal
 exec --no-startup-id nautilus
+exec --no-startup-id claude-desktop
+exec --no-startup-id gnome-terminal
 exec --no-startup-id steam -silent
 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 70%
 exec --no-startup-id brightnessctl set $(hour=$(date +%H) && [ "$hour" -ge 19 ] || [ "$hour" -le 6 ] && echo 70 || echo 100)%
