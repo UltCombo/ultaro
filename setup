@@ -137,7 +137,7 @@ sudo sysctl --system
 
 # Set up startup applications and services.
 flameshot config --autostart true
-sudo systemctl mask --now man-db.timer
+sudo systemctl mask --now man-db.timer pamac-daemon.service
 
 # Clean up.
 rm -f ~/Readme ~/Templates/* ~/.config/autostart/create-template.desktop ~/.config/autostart/manjaro-tiling-settings.desktop
