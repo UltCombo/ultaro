@@ -41,10 +41,14 @@ cat > "$WORKDIR/css-patch.js" <<'JSEOF'
   --cds-surface-2: #21252b !important;
   --cds-surface-3: #1e2227 !important;
 }
+[data-mode=dark] .dframe-root {
+  --df-bg-page: var(--cds-surface-1) !important;
+}
 [data-mode=dark] .dframe-root .dframe-sidebar, [data-mode=dark] .dframe-root .dframe-card {
   --df-sidebar-bg: var(--cds-surface-1) !important;
 }
-.dframe-content { background: #23272e !important; padding-top: 0 !important; }
+.dframe-chrome-bar { display: none !important; }
+.dframe-sidebar, .dframe-content { padding-top: 0 !important; }
 .dframe-root[data-variant=web] .df-header-backdrop { right: 0 !important; }
 .\[mask-image\:linear-gradient\(to_bottom\,black_66\.67\%\,transparent\)\] { mask-image: linear-gradient(#1e2227 66.67%, #1e222700) !important; background: #1e2227 !important; }
 [data-chat-input-container="true"] > [data-disclaimer="true"] > a { visibility: hidden !important; }
