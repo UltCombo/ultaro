@@ -58,6 +58,21 @@ cat > "$WORKDIR/css-patch.js" <<'JSEOF'
 .shrink-0[style*=titlebar-area-width] { display: none !important; }
 `;
 
+    // Must run before 'ready' fires. Blocks Intercom at DNS resolution, so it
+    // never connects regardless of scheme (https/wss) or which webRequest
+    // listener (if any) the app's own code registers later.
+    app.commandLine.appendSwitch(
+      'host-resolver-rules',
+      [
+        'MAP *.intercom.io 127.0.0.1',
+        'MAP intercom.io 127.0.0.1',
+        'MAP *.intercomcdn.com 127.0.0.1',
+        'MAP *.intercomassets.com 127.0.0.1',
+        'MAP *.intercomusercontent.com 127.0.0.1',
+        'MAP *.intercom.help 127.0.0.1'
+      ].join(',')
+    );
+
     app.on('web-contents-created', (_event, contents) => {
       contents.on('did-finish-load', () => {
         contents.insertCSS(CUSTOM_CSS).catch(() => {});
