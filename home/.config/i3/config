@@ -260,7 +260,6 @@ default_border pixel 1
 hide_edge_borders smart
 
 assign [instance="^vivaldi\-stable$"] tmp
-assign [class="steam"] $ws5
 assign [title="RuneScape"] $ws5
 
 set $brightnessNotification dunstify -t 1000 -h string:x-canonical-private-synchronous:brightness -h string:hlcolor:#ffffff -h int:value:$value "☀️ $value%"
