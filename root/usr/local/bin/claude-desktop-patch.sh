@@ -14,10 +14,10 @@ trap 'rm -rf "$WORKDIR"' EXIT
 echo "==> Extracting app.asar"
 asar extract "$ASAR" "$WORKDIR/extracted"
 
-MAIN_JS=$(grep -rl 'titleBarStyle:`hidden`,titleBarOverlay:!0' "$WORKDIR/extracted" --include="*.js" || true)
+MAIN_JS=$(grep -rl 'titleBarStyle:["`]hidden["`],titleBarOverlay:!0' "$WORKDIR/extracted" --include="*.js" || true)
 if [[ -n "$MAIN_JS" ]]; then
   echo "==> Patching title bar (titleBarStyle -> default)"
-  sed -i 's/titleBarStyle:`hidden`,titleBarOverlay:!0/titleBarStyle:`default`/' "$MAIN_JS"
+  sed -i 's/titleBarStyle:["`]hidden["`],titleBarOverlay:!0/titleBarStyle:"default"/' "$MAIN_JS"
 else
   echo "==> Title bar already patched, skipping"
 fi
