@@ -7,16 +7,16 @@ INCOGNITO_NEWTAB_MARKER = "duckduckgo.com/?q=&t=vivaldi"
 INIT_SCRIPT = """
 (function() {
   function clickRepeatOnce() {
-    var btn = document.querySelector('yt-icon-button.repeat');
+    const btn = document.querySelector('yt-icon-button.repeat');
     if (!btn) return setTimeout(clickRepeatOnce, 400);
     btn.click();
   }
   function setVolumeOnce() {
-    var slider = document.querySelector('#volume-slider');
-    if (!slider) return setTimeout(setVolumeOnce, 400);
-    slider.value = 60;
-    slider.dispatchEvent(new CustomEvent('immediate-value-change', {bubbles: true, composed: true}));
-    slider.dispatchEvent(new Event('change', {bubbles: true, composed: true}));
+    const VOLUME = 60;
+    const bar = document.querySelector('ytmusic-player-bar');
+    if (!bar || typeof bar.updateVolume !== 'function') return setTimeout(setVolumeOnce, 400);
+    bar.updateVolume(VOLUME);
+    if (bar.getState().player.volume !== VOLUME) setTimeout(setVolumeOnce, 400);
   }
   document.addEventListener('DOMContentLoaded', function() {
     clickRepeatOnce();
