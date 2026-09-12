@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+echo "==> Updating Node.js and @electron/asar"
 source /usr/share/nvm/init-nvm.sh
 nvm install node
 nvm use node
@@ -24,15 +25,34 @@ fi
 MAIN_REL=$(node -e "console.log(require('$WORKDIR/extracted/package.json').main)")
 MAIN_FILE="$WORKDIR/extracted/$MAIN_REL"
 [[ -f "$MAIN_FILE" ]] || { echo "!! No main entry at $MAIN_FILE" >&2; exit 1; }
+MAIN_DIR=$(dirname "$MAIN_FILE")
 
 sed -i '/__CLAUDE_DESKTOP_CSS_PATCH__/,/__CLAUDE_DESKTOP_CSS_PATCH_END__/d' "$MAIN_FILE"
 
-echo "==> Injecting CSS patch into: $MAIN_REL"
+# --- write the extra preload file that injects window.desktopManagedConfig ---
+echo "==> Writing managed-config preload"
+cat > "$MAIN_DIR/injected-managed-config-preload.js" <<'PRELOADEOF'
+const { contextBridge } = require('electron');
+const CONFIG = {
+  deploymentMode: '1p',
+  disableEssentialTelemetry: true,
+  disableNonessentialTelemetry: true,
+};
+try {
+  contextBridge.exposeInMainWorld('desktopManagedConfig', CONFIG);
+} catch (e) {
+  // contextIsolation may be off for this webContents; fall back to a direct assignment.
+  try { window.desktopManagedConfig = CONFIG; } catch (e2) {}
+}
+PRELOADEOF
+
+echo "==> Injecting CSS + Block Intercom + Disable all telemetry: $MAIN_REL"
 cat > "$WORKDIR/css-patch.js" <<'JSEOF'
 /* __CLAUDE_DESKTOP_CSS_PATCH__ */
 (function () {
   try {
-    const { app } = require('electron');
+    const { app, session } = require('electron');
+    const path = require('path');
 
     const CUSTOM_CSS = String.raw`
 [data-mode=dark] .cds-root:not([data-mode=light]):not([data-mode=system]), .cds-root[data-mode=dark] {
@@ -72,6 +92,20 @@ cat > "$WORKDIR/css-patch.js" <<'JSEOF'
         'MAP *.intercom.help 127.0.0.1'
       ].join(',')
     );
+
+    // Register our preload against every session (default + any partitioned
+    // ones), additive to whatever preload the app's own windows already use.
+    const PRELOAD_PATH = path.join(__dirname, 'injected-managed-config-preload.js');
+    function addPreload(ses) {
+      try {
+        const existing = ses.getPreloads ? ses.getPreloads() : [];
+        if (!existing.includes(PRELOAD_PATH)) ses.setPreloads([...existing, PRELOAD_PATH]);
+      } catch (e) {}
+    }
+    app.whenReady().then(() => addPreload(session.defaultSession));
+    if (typeof app.on === 'function') {
+      app.on('session-created', (ses) => addPreload(ses));
+    }
 
     app.on('web-contents-created', (_event, contents) => {
       contents.on('did-finish-load', () => {
