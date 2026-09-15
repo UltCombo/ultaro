@@ -21,6 +21,9 @@ INIT_SCRIPT = """
   document.addEventListener('DOMContentLoaded', function() {
     clickRepeatOnce();
     setVolumeOnce();
+
+    // Enable audio-video switcher.
+    window.ytcfg.set("IS_SUBSCRIBER", true);
   });
 })();
 """
