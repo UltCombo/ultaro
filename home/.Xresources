@@ -1,6 +1,6 @@
 Xcursor.size: 24
 
-! dpi default 96, recommended values 120 [125%], 144 [150%], 168 [175%], 192 [200%]
+! Default dpi: 96. Recommended values: 120 [125%], 144 [150%], 168 [175%], 192 [200%].
 Xft.dpi:       96
 Xft.rgba:      rgb
 Xft.lcdfilter: lcddefault
@@ -42,4 +42,6 @@ URxvt.intensityStyles: false
 URxvt.cursorBlink: true
 URxvt.scrollBar_right: true
 URxvt.multiClickTime: 250
-URxvt.keysym.M-f: searchable-scrollback:start
+! Ctrl+Shift+F to start search.
+URxvt.keysym.C-S-0x46: searchable-scrollback:start
+URxvt.keysym.M-f:      searchable-scrollback:start
