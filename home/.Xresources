@@ -1,1 +1,45 @@
 Xcursor.size: 24
+
+Xft.dpi:       96
+Xft.rgba:      rgb
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting:   true
+Xft.autohint:  false
+Xft.antialias: true
+
+URxvt.foreground: #d0cfcc
+URxvt.background: #1e2227
+URxvt.cursorColor: #d0cfcc
+URxvt.cursorColor2: #1e2227
+URxvt.color0: #171421
+URxvt.color1: #c01c28
+URxvt.color2: #26a269
+URxvt.color3: #a2734c
+URxvt.color4: #12488b
+URxvt.color5: #a347ba
+URxvt.color6: #2aa1b3
+URxvt.color7: #d0cfcc
+URxvt.color8: #5e5c64
+URxvt.color9: #f66151
+URxvt.color10: #33d17a
+URxvt.color11: #e9ad0c
+URxvt.color12: #2a7bde
+URxvt.color13: #c061cb
+URxvt.color14: #33c7de
+URxvt.color15: #ffffff
+URxvt.secondaryScroll: false
+URxvt.font:           xft:Fira Code:style=Regular:size=11,\
+                      xft:Noto Emoji:style=Regular:size=11
+URxvt.boldFont:       xft:Fira Code:style=Bold:size=11,\
+                      xft:Noto Emoji:style=Regular:size=11
+URxvt.italicFont:     xft:DejaVu Sans Mono:style=Oblique:size=11,\
+                      xft:Noto Emoji:style=Regular:size=11
+URxvt.boldItalicFont: xft:DejaVu Sans Mono:style=Bold Oblique:size=11,\
+                      xft:Noto Emoji:style=Regular:size=11
+URxvt.intensityStyles: false
+URxvt.cursorBlink: true
+URxvt.scrollBar_right: true
+URxvt.multiClickTime: 250
+URxvt.perl-ext-common: default,searchable-scrollback
+URxvt.keysym.M-f: perl:searchable-scrollback:start

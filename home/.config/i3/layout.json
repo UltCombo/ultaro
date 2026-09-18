@@ -176,7 +176,7 @@
             "percent": 0.4,
             "swallows": [
                 {
-                    "instance": "^org\\.gnome\\.Terminal$"
+                    "instance": "^urxvt$"
                 }
             ],
             "type": "con"

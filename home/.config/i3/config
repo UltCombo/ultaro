@@ -78,8 +78,8 @@ bindsym XF86AudioStop exec --no-startup-id playerctl pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
-bindsym XF86Calculator exec gnome-calculator
-bindsym $mod+F12 exec gnome-calculator
+bindsym XF86Calculator exec --no-startup-id gnome-calculator
+bindsym $mod+F12 exec --no-startup-id gnome-calculator
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -89,7 +89,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -295,7 +295,7 @@ exec --no-startup-id code
 exec --no-startup-id slack
 exec --no-startup-id nautilus
 exec --no-startup-id claude-desktop
-exec --no-startup-id gnome-terminal
+exec --no-startup-id urxvt
 exec --no-startup-id steam -silent
 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 70%
 exec --no-startup-id brightnessctl set $(hour=$(date +%H) && [ "$hour" -ge 19 ] || [ "$hour" -le 6 ] && echo 70 || echo 100)%
