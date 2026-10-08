@@ -45,3 +45,4 @@ URxvt.multiClickTime: 250
 ! Ctrl+Shift+F to start search.
 URxvt.keysym.C-S-0x46: searchable-scrollback:start
 URxvt.keysym.M-f:      searchable-scrollback:start
+URxvt.perl-ext-common: default,vtwheel

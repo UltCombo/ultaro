@@ -1,0 +1,30 @@
+#!/usr/bin/perl
+# vtwheel - emulate scroll wheel on the secondary screen via Up/Down keypresses
+
+my $scroll_lines = 3;
+my $key_up       = 111;   # X keycode for Up   (typical evdev layouts)
+my $key_down     = 116;   # X keycode for Down
+
+sub simulate_keypress {
+    my ($self, $keycode) = @_;
+    for (1 .. $scroll_lines) {
+        $self->key_press(0, $keycode);
+        $self->key_release(0, $keycode);
+    }
+}
+
+sub on_button_release {
+    my ($self, $event) = @_;
+
+    # leave the primary screen alone (normal scrollback)
+    return () unless $self->current_screen;
+
+    if ($event->{button} == 4) {
+        $self->simulate_keypress($key_up);
+        return 1;
+    } elsif ($event->{button} == 5) {
+        $self->simulate_keypress($key_down);
+        return 1;
+    }
+    return ();
+}
