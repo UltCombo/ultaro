@@ -48,7 +48,11 @@ URxvt.keysym.C-S-v:    eval:paste_clipboard
 URxvt.keysym.C-S-V:    eval:paste_clipboard
 URxvt.keysym.C-S-f:    searchable-scrollback:start
 URxvt.keysym.C-S-F:    searchable-scrollback:start
-URxvt.keysym.M-f:      searchable-scrollback:start
+URxvt.keysym.C-Left:  \033[1;5D
+URxvt.keysym.C-Right: \033[1;5C
+URxvt.keysym.C-Up:     \033[1;5A
+URxvt.keysym.C-Down:   \033[1;5B
+URxvt.keysym.C-Delete: \033[3;5~
 URxvt.perl-ext-common: default,-selection,eval,matcher,vtwheel
 URxvt.url-launcher: xdg-open
 URxvt.matcher.button: C1
