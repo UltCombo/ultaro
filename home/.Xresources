@@ -42,7 +42,11 @@ URxvt.intensityStyles: false
 URxvt.cursorBlink: true
 URxvt.scrollBar_right: true
 URxvt.multiClickTime: 250
-! Ctrl+Shift+F to start search.
-URxvt.keysym.C-S-0x46: searchable-scrollback:start
+URxvt.keysym.C-S-c:    eval:selection_to_clipboard
+URxvt.keysym.C-S-C:    eval:selection_to_clipboard
+URxvt.keysym.C-S-v:    eval:paste_clipboard
+URxvt.keysym.C-S-V:    eval:paste_clipboard
+URxvt.keysym.C-S-f:    searchable-scrollback:start
+URxvt.keysym.C-S-F:    searchable-scrollback:start
 URxvt.keysym.M-f:      searchable-scrollback:start
-URxvt.perl-ext-common: default,vtwheel
+URxvt.perl-ext-common: default,eval,vtwheel
