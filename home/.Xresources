@@ -1,3 +1,4 @@
+Xcursor.theme: Adwaita
 Xcursor.size: 24
 
 ! Default dpi: 96. Recommended values: 120 [125%], 144 [150%], 168 [175%], 192 [200%].
@@ -48,6 +49,8 @@ URxvt.keysym.C-S-v:    eval:paste_clipboard
 URxvt.keysym.C-S-V:    eval:paste_clipboard
 URxvt.keysym.C-S-f:    searchable-scrollback:start
 URxvt.keysym.C-S-F:    searchable-scrollback:start
+URxvt.keysym.C-S-k: command:\033c
+URxvt.keysym.C-S-K: command:\033c
 URxvt.keysym.C-Left:   \033[1;5D
 URxvt.keysym.C-Right:  \033[1;5C
 URxvt.keysym.C-Up:     \033[1;5A

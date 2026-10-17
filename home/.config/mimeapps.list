@@ -6,7 +6,7 @@ image/png=org.nomacs.ImageLounge.desktop;
 image/jpeg=org.nomacs.ImageLounge.desktop;
 
 [Default Applications]
-inode/directory=org.gnome.Nautilus.desktop
+inode/directory=org.kde.dolphin.desktop
 text/html=browser-launcher.desktop
 x-scheme-handler/http=browser-launcher.desktop
 x-scheme-handler/https=browser-launcher.desktop
