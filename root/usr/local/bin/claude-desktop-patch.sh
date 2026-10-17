@@ -4,7 +4,6 @@ set -euo pipefail
 echo "==> Updating Node.js and @electron/asar"
 source /usr/share/nvm/init-nvm.sh
 nvm install node
-nvm use node
 npm install -g @electron/asar
 
 ASAR=/usr/lib/claude-desktop/resources/app.asar
