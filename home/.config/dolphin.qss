@@ -1,0 +1,7 @@
+KItemListContainer {
+  background-color: #23272e;
+}
+
+QAbstractItemView {
+  background-color: #1e2227;
+}

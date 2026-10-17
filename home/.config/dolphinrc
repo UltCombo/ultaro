@@ -1,4 +1,5 @@
 [General]
+GlobalViewProps=false
 RememberOpenedTabs=false
 ShowSelectionToggle=false
 Version=202
@@ -12,7 +13,7 @@ Places Icons Static Size=22
 MenuBar=Disabled
 
 [PreviewSettings]
-Plugins=ebookthumbnail,windowsexethumbnail,windowsimagethumbnail,audiothumbnail,imagethumbnail,kraorathumbnail,djvuthumbnail,svgthumbnail,appimagethumbnail,cursorthumbnail,comicbookthumbnail,directorythumbnail,exrthumbnail,opendocumentthumbnail,jpegthumbnail,gsf-office,glycin-jxl,glycin-svg,glycin-image-rs,glycin-heif
+Plugins=appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,glycin-svg,svgthumbnail,gsf-office
 
 [UiSettings]
 ColorScheme=BreezeDark
