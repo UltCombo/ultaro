@@ -22,8 +22,11 @@ IntensityAmount=0
 IntensityEffect=0
 
 [Colors:Button]
+BackgroundNormal=44,49,58
+ForegroundNormal=215,218,224
+
 BackgroundAlternate=30,87,116
-BackgroundNormal=41,44,48
+#BackgroundNormal=41,44,48
 DecorationFocus=61,174,233
 DecorationHover=61,174,233
 ForegroundActive=61,174,233
@@ -31,7 +34,7 @@ ForegroundInactive=161,169,177
 ForegroundLink=29,153,243
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
-ForegroundNormal=252,252,252
+#ForegroundNormal=252,252,252
 ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
@@ -78,8 +81,11 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [Colors:Selection]
+BackgroundNormal=59,79,107
+ForegroundNormal=255,255,255
+
 BackgroundAlternate=30,87,116
-BackgroundNormal=61,174,233
+#BackgroundNormal=61,174,233
 DecorationFocus=61,174,233
 DecorationHover=61,174,233
 ForegroundActive=252,252,252
@@ -87,7 +93,7 @@ ForegroundInactive=161,169,177
 ForegroundLink=253,188,75
 ForegroundNegative=176,55,69
 ForegroundNeutral=198,92,0
-ForegroundNormal=252,252,252
+#ForegroundNormal=252,252,252
 ForegroundPositive=23,104,57
 ForegroundVisited=155,89,182
 
@@ -106,8 +112,12 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [Colors:View]
-BackgroundAlternate=29,31,34
-BackgroundNormal=20,22,24
+BackgroundNormal=35,39,46
+BackgroundAlternate=40,44,52
+ForegroundNormal=215,218,224
+
+# BackgroundAlternate=29,31,34
+# BackgroundNormal=20,22,24
 DecorationFocus=61,174,233
 DecorationHover=61,174,233
 ForegroundActive=61,174,233
@@ -115,13 +125,16 @@ ForegroundInactive=161,169,177
 ForegroundLink=29,153,243
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
-ForegroundNormal=252,252,252
+# ForegroundNormal=252,252,252
 ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [Colors:Window]
+BackgroundNormal=33,37,43
+ForegroundNormal=215,218,224
+
 BackgroundAlternate=41,44,48
-BackgroundNormal=32,35,38
+#BackgroundNormal=32,35,38
 DecorationFocus=61,174,233
 DecorationHover=61,174,233
 ForegroundActive=61,174,233
@@ -129,14 +142,13 @@ ForegroundInactive=161,169,177
 ForegroundLink=29,153,243
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
-ForegroundNormal=252,252,252
+#ForegroundNormal=252,252,252
 ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [General]
-ColorScheme=BreezeDark
-ColorSchemeHash=cb4c6ee5cc9a59dbe09fb467a529af1bf5c55c97
-Name=Breeze Dark
+ColorScheme=OneBreezeDark
+Name=One Breeze Dark
 Name[ar]=نسيم داكن
 Name[az]=Breeze - Tünd
 Name[bg]=Breeze Тъмен
@@ -219,7 +231,7 @@ Speedbar Width=138
 View Style=DetailTree
 
 [UiSettings]
-ColorScheme=BreezeDark
+ColorScheme=OneBreezeDark
 
 [WM]
 activeBackground=39,44,49

@@ -295,7 +295,7 @@ exec --no-startup-id vivaldi --remote-debugging-port=9222 --remote-allow-origins
 exec --no-startup-id sleep 5 && $openWebPrivateCommand && sleep 5 && python3 /home/ult/.config/i3/play_music.py && i3-msg 'workspace number 1'
 exec --no-startup-id code
 exec --no-startup-id slack
-exec --no-startup-id dolphin -stylesheet /home/ult/.config/dolphin.qss ~
+exec --no-startup-id dolphin
 exec --no-startup-id claude-desktop
 exec --no-startup-id urxvt
 exec --no-startup-id steam -silent
