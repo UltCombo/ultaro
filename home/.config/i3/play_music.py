@@ -7,12 +7,24 @@ INCOGNITO_NEWTAB_MARKER = "duckduckgo.com/?q=&t=vivaldi"
 INIT_SCRIPT = """
 (function() {
   function clickRepeatOnce() {
-    const btn = document.querySelector('yt-icon-button.repeat');
+    // Try to find either the new player or old player's repeat button and click it.
+    const btn = document.querySelector('.ytmusicPlayerControlsRepeatButton > button, yt-icon-button.repeat');
     if (!btn) return setTimeout(clickRepeatOnce, 400);
     btn.click();
   }
+
   function setVolumeOnce() {
     const VOLUME = 60;
+
+    // New player being A/B tested.
+    const slider = document.querySelector('.ytMusicMiniPlayerVolumePopup input');
+    if (slider) {
+      slider.value = VOLUME;
+      slider.dispatchEvent(new InputEvent('change'));
+      return;
+    }
+
+    // Old player.
     const bar = document.querySelector('ytmusic-player-bar');
     if (!bar || typeof bar.updateVolume !== 'function') return setTimeout(setVolumeOnce, 400);
     bar.updateVolume(VOLUME);
