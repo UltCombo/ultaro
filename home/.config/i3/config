@@ -165,7 +165,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-workspace $ws5 output HDMI-1-0
+workspace $ws5 output HDMI-0 HDMI-1-0
 
 # switch to workspace
 # bindsym $mod+1 workspace number $ws1
@@ -270,8 +270,8 @@ bindsym $mod+F6 exec --no-startup-id value="$(brightnessctl set +10% | grep -Pom
 bindsym $mod+F5 exec --no-startup-id value="$(brightnessctl set 10%- | grep -Pom1 '[0-9]+(?=%)')" && $brightnessNotification
 
 bindsym Print exec --no-startup-id flameshot full -p /home/ult/Pictures/Screenshots -c
-bindsym Shift+Print exec --no-startup-id flameshot screen -n 1 -p /home/ult/Pictures/Screenshots -c -e
-bindsym $mod+Shift+Print exec --no-startup-id flameshot screen -n 0 -p /home/ult/Pictures/Screenshots -c -e
+bindsym Shift+Print exec --no-startup-id flameshot screen -n 0 -p /home/ult/Pictures/Screenshots -c -e
+bindsym $mod+Shift+Print exec --no-startup-id flameshot screen -n 1 -p /home/ult/Pictures/Screenshots -c -e
 
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
@@ -290,7 +290,7 @@ bindsym $mod+Shift+d exec --no-startup-id dunstctl set-paused toggle && $updateD
 set $openWebPrivateCommand vivaldi --incognito 'https://duckduckgo.com/?q=&t=vivaldi&kae=d&k1=-1&kaj=m&kam=osm&kak=-1&kax=-1&kaq=-1&kap=-1&kao=-1&kau=-1&k5=2&k7=282c34&kj=21252b&k9=98c379&kx=61afef'
 
 exec --no-startup-id snixembed
-exec --no-startup-id i3-msg 'append_layout /home/ult/.config/i3/layout.json'
+exec --no-startup-id i3-msg 'append_layout /home/ult/.config/i3/layout.json; workspace "1:Web"; move workspace to output primary; workspace "2:Code"; move workspace to output primary; workspace "3:Comms"; move workspace to output primary; workspace "4:Files"; move workspace to output primary; workspace "Term"; move workspace to output primary; workspace "Private"; move workspace to output primary'
 exec --no-startup-id vivaldi --remote-debugging-port=9222 --remote-allow-origins=http://localhost:9222
 exec --no-startup-id sleep 5 && $openWebPrivateCommand && sleep 5 && python3 /home/ult/.config/i3/play_music.py && i3-msg 'workspace number 1'
 exec --no-startup-id code
