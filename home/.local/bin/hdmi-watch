@@ -1,0 +1,30 @@
+#!/bin/bash
+# Reacts to HDMI plug/unplug via X RandR events (NVIDIA doesn't emit udev events).
+# Start it from i3: exec --no-startup-id ~/.local/bin/hdmi-watch
+
+state() {
+    xrandr --query | grep -q "^HDMI-0 connected" && echo on || echo off
+}
+
+apply() {
+    if [ "$1" = on ]; then
+        xrandr --output HDMI-0 --auto --below eDP-1-1
+        feh --bg-scale /home/ult/workspace/ult/ultaro/images/wallpaper.jpg
+    else
+        xrandr --output HDMI-0 --off
+    fi
+}
+
+last=$(state)
+apply "$last"
+
+# Our own xrandr calls also emit RandR events, so only act when the
+# connection state actually changes.
+xev -root -event randr | grep --line-buffered '^RRNotify' | while read -r _; do
+    sleep 0.5
+    now=$(state)
+    if [ "$now" != "$last" ]; then
+        apply "$now"
+        last=$now
+    fi
+done

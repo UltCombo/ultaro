@@ -301,7 +301,8 @@ exec --no-startup-id urxvt
 exec --no-startup-id steam -silent
 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 70%
 exec --no-startup-id brightnessctl set $(hour=$(date +%H) && [ "$hour" -ge 19 ] || [ "$hour" -le 6 ] && echo 70 || echo 100)%
-exec --no-startup-id mpv --shuffle --loop-playlist=inf --no-video --volume=70 "/home/ult/Music/Ultimate 2000's"
+exec --no-startup-id mpv --shuffle --loop-playlist=inf --no-video --volume=60 "/home/ult/Music/Ultimate 2000's"
+exec --no-startup-id ~/.local/bin/hdmi-watch
 
 set $webNormalMark web-normal
 set $webPrivateMark web-private
