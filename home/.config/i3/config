@@ -291,8 +291,8 @@ set $openWebPrivateCommand vivaldi --incognito 'https://duckduckgo.com/?q=&t=viv
 
 exec --no-startup-id snixembed
 exec --no-startup-id i3-msg 'append_layout /home/ult/.config/i3/layout.json; workspace "1:Web"; move workspace to output primary; workspace "2:Code"; move workspace to output primary; workspace "3:Comms"; move workspace to output primary; workspace "4:Files"; move workspace to output primary; workspace "Term"; move workspace to output primary; workspace "Private"; move workspace to output primary'
-exec --no-startup-id vivaldi --remote-debugging-port=9222 --remote-allow-origins=http://localhost:9222
-exec --no-startup-id sleep 5 && $openWebPrivateCommand && sleep 5 && python3 /home/ult/.config/i3/play_music.py && i3-msg 'workspace number 1'
+exec --no-startup-id vivaldi
+exec --no-startup-id sleep 5 && $openWebPrivateCommand && sleep 5 && i3-msg 'workspace number 1'
 exec --no-startup-id code
 exec --no-startup-id slack
 exec --no-startup-id dolphin
@@ -301,6 +301,7 @@ exec --no-startup-id urxvt
 exec --no-startup-id steam -silent
 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 70%
 exec --no-startup-id brightnessctl set $(hour=$(date +%H) && [ "$hour" -ge 19 ] || [ "$hour" -le 6 ] && echo 70 || echo 100)%
+exec --no-startup-id mpv --shuffle --loop-playlist=inf --no-video --volume=70 "/home/ult/Music/Ultimate 2000's"
 
 set $webNormalMark web-normal
 set $webPrivateMark web-private

@@ -16,7 +16,7 @@ fi
 grep -qF 'ILoveCandy' /etc/pacman.conf || sudo sed -i'' '/# Misc options/a ILoveCandy' /etc/pacman.conf
 sudo pacman -Syu --noconfirm
 KEEP_PACKAGES="gnome-keyring" remove_packages tlp manjaro-hello manjaro-gdm-theme manjaro-gnome-settings manjaro-gnome-assets gnome gnome-extra evince mutter mutter-devkit nautilus-admin nautilus-empty-file gnome-screenshot gthumb totem caffeine-ng mntray
-sudo pacman -S --needed --noconfirm base-devel nvm yay aws-cli git fish docker docker-compose xorg-xinput xorg-xprop xorg-xev xorg-xwininfo xorg-xkill xclip xdotool flameshot breeze breeze-icons ttf-fira-code noto-fonts-emoji vivaldi vivaldi-ffmpeg-codecs dolphin ark baloo libappindicator snixembed openresolv network-manager-applet blueman brightnessctl playerctl power-profiles-daemon lightdm lightdm-gtk-greeter i3-wm perl-anyevent-i3 i3status xss-lock dmenu feh dex dunst picom numlockx gnome-keyring polkit-gnome lxappearance thermald python-websocket-client python-requests
+sudo pacman -S --needed --noconfirm base-devel nvm yay aws-cli git fish docker docker-compose xorg-xinput xorg-xprop xorg-xev xorg-xwininfo xorg-xkill xclip xdotool flameshot breeze breeze-icons ttf-fira-code noto-fonts-emoji vivaldi vivaldi-ffmpeg-codecs dolphin ark baloo libappindicator snixembed openresolv network-manager-applet blueman brightnessctl playerctl mpv mpv-mpris power-profiles-daemon lightdm lightdm-gtk-greeter i3-wm perl-anyevent-i3 i3status xss-lock dmenu feh dex dunst picom numlockx gnome-keyring polkit-gnome lxappearance thermald python-websocket-client python-requests python-mutagen yt-dlp
 yay -S --needed --noconfirm i3lock-color rxvt-unicode-truecolor-wide-glyphs visual-studio-code-bin stacer nomacs slack-desktop
 yay -Yc --noconfirm
 yes | yay -Scc || true
@@ -72,3 +72,6 @@ sudo systemctl mask --now man-db.timer pamac-daemon.service
 rm -f ~/Readme ~/Templates/* ~/.config/autostart/create-template.desktop ~/.config/autostart/manjaro-tiling-settings.desktop
 
 echo '✨ Setup finished successfully.'
+
+# Download playlist:
+# cd ~/Music && yt-dlp -x --embed-metadata --embed-thumbnail --ignore-errors -o '%(playlist_title)s/%(playlist_index)03d - %(artist,uploader)s - %(title)s.%(ext)s' 'https://music.youtube.com/playlist?list=PL5sLVFzDBpqlyjXM6s6jozOKR018aDr8Q'
