@@ -69,13 +69,7 @@ cat > "$WORKDIR/css-patch.js" <<'JSEOF'
   --df-web-sidebar-bg: var(--cds-surface-3) !important;
 }
 .dframe-chrome-bar { padding-right: 12px !important; }
-.dframe-content-inner::before { content: none !important; }
-.dframe-root[data-variant=web] .df-header-backdrop { right: 0 !important; }
-.\[mask-image\:linear-gradient\(to_bottom\,black_66\.67\%\,transparent\)\] { mask-image: linear-gradient(#1e2227 66.67%, #1e222700) !important; background: #1e2227 !important; }
 [data-disclaimer="true"], [data-disclaimer="true"] * { color: transparent !important; pointer-events: none !important; }
-.dframe-pane-scroller { padding: 0 !important; }
-[data-testid="chat-column-body"] { padding-left: calc(var(--spacing) * 2) !important; }
-.shrink-0[style*=titlebar-area-width] { display: none !important; }
 `;
 
     // Must run before 'ready' fires. Blocks Intercom at DNS resolution, so it
