@@ -13,12 +13,29 @@ trap 'rm -rf "$WORKDIR"' EXIT
 echo "==> Extracting app.asar"
 asar extract "$ASAR" "$WORKDIR/extracted"
 
-MAIN_JS=$(grep -rl 'titleBarStyle:["`]hidden["`],titleBarOverlay:!0' "$WORKDIR/extracted" --include="*.js" || true)
-if [[ -n "$MAIN_JS" ]]; then
-  echo "==> Patching title bar (titleBarStyle -> default)"
-  sed -i 's/titleBarStyle:["`]hidden["`],titleBarOverlay:!0/titleBarStyle:"default"/' "$MAIN_JS"
-else
+# Main window title bar -> native. The app builds the main window options as
+#   pOr({...,titleBarOverlay:!0,trafficLightPosition:...}) -> {...e,title:...,titleBarStyle:"hidden",icon:...}
+# so flip the style in the builder and drop the overlay flag at the call site.
+# (Older builds had both inline: titleBarStyle:"hidden",titleBarOverlay:!0.)
+TB_STYLE='titleBarStyle:["`]hidden["`],icon:'
+TB_OVERLAY='titleBarOverlay:!0,trafficLightPosition:'
+TB_LEGACY='titleBarStyle:["`]hidden["`],titleBarOverlay:!0'
+MAIN_JS=$(grep -rlE "$TB_STYLE|$TB_LEGACY" "$WORKDIR/extracted" --include="*.js" || true)
+if [[ $(wc -l <<<"$MAIN_JS") -gt 1 ]]; then
+  echo "!! Title bar pattern matched more than one file, refusing to guess:" >&2
+  echo "$MAIN_JS" >&2
+  exit 1
+elif [[ -n "$MAIN_JS" ]]; then
+  echo "==> Patching title bar (titleBarStyle -> default): ${MAIN_JS#"$WORKDIR/extracted/"}"
+  sed -i -E \
+    -e "s/$TB_LEGACY/titleBarStyle:\"default\"/" \
+    -e "s/$TB_STYLE/titleBarStyle:\"default\",icon:/" \
+    -e "s/$TB_OVERLAY/trafficLightPosition:/" \
+    "$MAIN_JS"
+elif grep -rqE 'titleBarStyle:"default",icon:' "$WORKDIR/extracted" --include="*.js"; then
   echo "==> Title bar already patched, skipping"
+else
+  echo "!! Title bar pattern not found — the app changed, update this script" >&2
 fi
 
 MAIN_REL=$(node -e "console.log(require('$WORKDIR/extracted/package.json').main)")
@@ -72,33 +89,71 @@ cat > "$WORKDIR/css-patch.js" <<'JSEOF'
 [data-disclaimer="true"], [data-disclaimer="true"] * { color: transparent !important; pointer-events: none !important; }
 `;
 
-    // Must run before 'ready' fires. Blocks Intercom at DNS resolution, so it
-    // never connects regardless of scheme (https/wss) or which webRequest
-    // listener (if any) the app's own code registers later.
-    app.commandLine.appendSwitch(
-      'host-resolver-rules',
-      [
-        'MAP *.intercom.io 127.0.0.1',
-        'MAP intercom.io 127.0.0.1',
-        'MAP *.intercomcdn.com 127.0.0.1',
-        'MAP *.intercomassets.com 127.0.0.1',
-        'MAP *.intercomusercontent.com 127.0.0.1',
-        'MAP *.intercom.help 127.0.0.1'
-      ].join(',')
-    );
+    // Block Intercom via webRequest. (The app now refuses to start when
+    // --host-resolver-rules is on its command line, so DNS mapping is out.)
+    // Electron keeps only one onBeforeRequest listener per session and the
+    // app registers its own on several sessions, which would replace ours.
+    // So wrap each session's onBeforeRequest: whatever listener the app sets
+    // is chained behind our Intercom check, and a session the app never
+    // touches still gets the check on its own.
+    const INTERCOM_DOMAINS = [
+      'intercom.io',
+      'intercomcdn.com',
+      'intercomassets.com',
+      'intercomusercontent.com',
+      'intercom.help',
+    ];
+    function isIntercom(url) {
+      let host;
+      try { host = new URL(url).hostname.toLowerCase(); } catch (e) { return false; }
+      return INTERCOM_DOMAINS.some((d) => host === d || host.endsWith('.' + d));
+    }
+    const GUARDED = Symbol('intercomGuard');
+    function guardSession(ses) {
+      try {
+        const wr = ses.webRequest;
+        if (!wr || wr[GUARDED]) return;
+        const original = wr.onBeforeRequest.bind(wr);
+        const install = (filter, listener) => {
+          const chained = (details, callback) => {
+            if (isIntercom(details.url)) return callback({ cancel: true });
+            if (listener) return listener(details, callback);
+            callback({});
+          };
+          return filter ? original(filter, chained) : original(chained);
+        };
+        wr.onBeforeRequest = function (filterOrListener, listener) {
+          // onBeforeRequest(listener | null) or onBeforeRequest(filter, listener | null)
+          if (filterOrListener == null || typeof filterOrListener === 'function') {
+            return install(null, filterOrListener || null);
+          }
+          return install(filterOrListener, listener || null);
+        };
+        wr[GUARDED] = true;
+        install(null, null);
+      } catch (e) {}
+    }
 
     // Register our preload against every session (default + any partitioned
     // ones), additive to whatever preload the app's own windows already use.
     const PRELOAD_PATH = path.join(__dirname, 'injected-managed-config-preload.js');
     function addPreload(ses) {
       try {
-        const existing = ses.getPreloads ? ses.getPreloads() : [];
-        if (!existing.includes(PRELOAD_PATH)) ses.setPreloads([...existing, PRELOAD_PATH]);
+        const existing = ses.getPreloadScripts();
+        if (!existing.some((s) => s.filePath === PRELOAD_PATH)) {
+          ses.registerPreloadScript({ type: 'frame', filePath: PRELOAD_PATH });
+        }
       } catch (e) {}
     }
-    app.whenReady().then(() => addPreload(session.defaultSession));
+    app.whenReady().then(() => {
+      guardSession(session.defaultSession);
+      addPreload(session.defaultSession);
+    });
     if (typeof app.on === 'function') {
-      app.on('session-created', (ses) => addPreload(ses));
+      app.on('session-created', (ses) => {
+        guardSession(ses);
+        addPreload(ses);
+      });
     }
 
     app.on('web-contents-created', (_event, contents) => {
