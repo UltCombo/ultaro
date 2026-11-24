@@ -73,6 +73,7 @@ set $refreshPowerProfile sed -E -e "s/performance/🚀/" -e "s/balanced/⚖️/"
 set $powerProfileNotification dunstify -t 2000 -h string:x-canonical-private-synchronous:powerprofile "$(cat -)"
 exec --no-startup-id powerprofilesctl get | $refreshPowerProfile && gdbus monitor --system --dest org.freedesktop.UPower.PowerProfiles --object-path /org/freedesktop/UPower/PowerProfiles | grep --line-buffered -Po "(?<='ActiveProfile': <')[^']+(?='>)" | xargs -I'{}' sh -c 'echo "{}" | $refreshPowerProfile | $powerProfileNotification && $refresh_i3status'
 
+bindsym $mod+space exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioStop exec --no-startup-id playerctl pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
@@ -142,9 +143,6 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
